@@ -23,17 +23,39 @@ class FinishView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Spacer(),
           Column(
             children: [
-              // Lottie Animation
-              Lottie.network(
-                'https://lottie.host/471a629b-2191-4194-9e22-c1c7503db269/p940kXU72Y.lottie',
-                width: 140,
-                height: 140,
-                repeat: false,
+              // Lottie Animation & Green Check
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: Stack(
+                  alignment: Alignment.center,
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF34C759),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 60,
+                      ),
+                    ),
+                    Lottie.asset(
+                      'assets/animation.lottie',
+                      width: 200,
+                      height: 200,
+                      repeat: false,
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -65,7 +87,7 @@ class FinishView extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
+          const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: isDark
@@ -106,6 +128,7 @@ class FinishView extends StatelessWidget {
                   : const Color(0xFFF2F2F7),
               foregroundColor: isDark ? Colors.white : const Color(0xFF1A1A1A),
               padding: const EdgeInsets.symmetric(vertical: 20),
+              maximumSize: const Size(double.infinity, 60),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(40),
               ),
