@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BreathingState {
 
- BreathingPhase get phase; BreathingSession get session; int get currentRound; int get secondsRemaining; bool get isDarkMode;
+ BreathingPhase get phase; BreathingSession get session; int get currentRound; int get secondsRemaining; bool get isDarkMode; bool get isPaused;
 /// Create a copy of BreathingState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $BreathingStateCopyWith<BreathingState> get copyWith => _$BreathingStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BreathingState&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.session, session) || other.session == session)&&(identical(other.currentRound, currentRound) || other.currentRound == currentRound)&&(identical(other.secondsRemaining, secondsRemaining) || other.secondsRemaining == secondsRemaining)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BreathingState&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.session, session) || other.session == session)&&(identical(other.currentRound, currentRound) || other.currentRound == currentRound)&&(identical(other.secondsRemaining, secondsRemaining) || other.secondsRemaining == secondsRemaining)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode)&&(identical(other.isPaused, isPaused) || other.isPaused == isPaused));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phase,session,currentRound,secondsRemaining,isDarkMode);
+int get hashCode => Object.hash(runtimeType,phase,session,currentRound,secondsRemaining,isDarkMode,isPaused);
 
 @override
 String toString() {
-  return 'BreathingState(phase: $phase, session: $session, currentRound: $currentRound, secondsRemaining: $secondsRemaining, isDarkMode: $isDarkMode)';
+  return 'BreathingState(phase: $phase, session: $session, currentRound: $currentRound, secondsRemaining: $secondsRemaining, isDarkMode: $isDarkMode, isPaused: $isPaused)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $BreathingStateCopyWith<$Res>  {
   factory $BreathingStateCopyWith(BreathingState value, $Res Function(BreathingState) _then) = _$BreathingStateCopyWithImpl;
 @useResult
 $Res call({
- BreathingPhase phase, BreathingSession session, int currentRound, int secondsRemaining, bool isDarkMode
+ BreathingPhase phase, BreathingSession session, int currentRound, int secondsRemaining, bool isDarkMode, bool isPaused
 });
 
 
@@ -62,13 +62,14 @@ class _$BreathingStateCopyWithImpl<$Res>
 
 /// Create a copy of BreathingState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phase = null,Object? session = null,Object? currentRound = null,Object? secondsRemaining = null,Object? isDarkMode = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? phase = null,Object? session = null,Object? currentRound = null,Object? secondsRemaining = null,Object? isDarkMode = null,Object? isPaused = null,}) {
   return _then(_self.copyWith(
 phase: null == phase ? _self.phase : phase // ignore: cast_nullable_to_non_nullable
 as BreathingPhase,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as BreathingSession,currentRound: null == currentRound ? _self.currentRound : currentRound // ignore: cast_nullable_to_non_nullable
 as int,secondsRemaining: null == secondsRemaining ? _self.secondsRemaining : secondsRemaining // ignore: cast_nullable_to_non_nullable
 as int,isDarkMode: null == isDarkMode ? _self.isDarkMode : isDarkMode // ignore: cast_nullable_to_non_nullable
+as bool,isPaused: null == isPaused ? _self.isPaused : isPaused // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -163,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( BreathingPhase phase,  BreathingSession session,  int currentRound,  int secondsRemaining,  bool isDarkMode)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( BreathingPhase phase,  BreathingSession session,  int currentRound,  int secondsRemaining,  bool isDarkMode,  bool isPaused)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BreathingState() when $default != null:
-return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemaining,_that.isDarkMode);case _:
+return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemaining,_that.isDarkMode,_that.isPaused);case _:
   return orElse();
 
 }
@@ -184,10 +185,10 @@ return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemain
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( BreathingPhase phase,  BreathingSession session,  int currentRound,  int secondsRemaining,  bool isDarkMode)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( BreathingPhase phase,  BreathingSession session,  int currentRound,  int secondsRemaining,  bool isDarkMode,  bool isPaused)  $default,) {final _that = this;
 switch (_that) {
 case _BreathingState():
-return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemaining,_that.isDarkMode);case _:
+return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemaining,_that.isDarkMode,_that.isPaused);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +205,10 @@ return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemain
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( BreathingPhase phase,  BreathingSession session,  int currentRound,  int secondsRemaining,  bool isDarkMode)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( BreathingPhase phase,  BreathingSession session,  int currentRound,  int secondsRemaining,  bool isDarkMode,  bool isPaused)?  $default,) {final _that = this;
 switch (_that) {
 case _BreathingState() when $default != null:
-return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemaining,_that.isDarkMode);case _:
+return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemaining,_that.isDarkMode,_that.isPaused);case _:
   return null;
 
 }
@@ -219,7 +220,7 @@ return $default(_that.phase,_that.session,_that.currentRound,_that.secondsRemain
 
 
 class _BreathingState implements BreathingState {
-  const _BreathingState({this.phase = BreathingPhase.setup, this.session = const BreathingSession(), this.currentRound = 0, this.secondsRemaining = 0, this.isDarkMode = false});
+  const _BreathingState({this.phase = BreathingPhase.setup, this.session = const BreathingSession(), this.currentRound = 0, this.secondsRemaining = 0, this.isDarkMode = false, this.isPaused = false});
   
 
 @override@JsonKey() final  BreathingPhase phase;
@@ -227,6 +228,7 @@ class _BreathingState implements BreathingState {
 @override@JsonKey() final  int currentRound;
 @override@JsonKey() final  int secondsRemaining;
 @override@JsonKey() final  bool isDarkMode;
+@override@JsonKey() final  bool isPaused;
 
 /// Create a copy of BreathingState
 /// with the given fields replaced by the non-null parameter values.
@@ -238,16 +240,16 @@ _$BreathingStateCopyWith<_BreathingState> get copyWith => __$BreathingStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BreathingState&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.session, session) || other.session == session)&&(identical(other.currentRound, currentRound) || other.currentRound == currentRound)&&(identical(other.secondsRemaining, secondsRemaining) || other.secondsRemaining == secondsRemaining)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BreathingState&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.session, session) || other.session == session)&&(identical(other.currentRound, currentRound) || other.currentRound == currentRound)&&(identical(other.secondsRemaining, secondsRemaining) || other.secondsRemaining == secondsRemaining)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode)&&(identical(other.isPaused, isPaused) || other.isPaused == isPaused));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phase,session,currentRound,secondsRemaining,isDarkMode);
+int get hashCode => Object.hash(runtimeType,phase,session,currentRound,secondsRemaining,isDarkMode,isPaused);
 
 @override
 String toString() {
-  return 'BreathingState(phase: $phase, session: $session, currentRound: $currentRound, secondsRemaining: $secondsRemaining, isDarkMode: $isDarkMode)';
+  return 'BreathingState(phase: $phase, session: $session, currentRound: $currentRound, secondsRemaining: $secondsRemaining, isDarkMode: $isDarkMode, isPaused: $isPaused)';
 }
 
 
@@ -258,7 +260,7 @@ abstract mixin class _$BreathingStateCopyWith<$Res> implements $BreathingStateCo
   factory _$BreathingStateCopyWith(_BreathingState value, $Res Function(_BreathingState) _then) = __$BreathingStateCopyWithImpl;
 @override @useResult
 $Res call({
- BreathingPhase phase, BreathingSession session, int currentRound, int secondsRemaining, bool isDarkMode
+ BreathingPhase phase, BreathingSession session, int currentRound, int secondsRemaining, bool isDarkMode, bool isPaused
 });
 
 
@@ -275,13 +277,14 @@ class __$BreathingStateCopyWithImpl<$Res>
 
 /// Create a copy of BreathingState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? phase = null,Object? session = null,Object? currentRound = null,Object? secondsRemaining = null,Object? isDarkMode = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? phase = null,Object? session = null,Object? currentRound = null,Object? secondsRemaining = null,Object? isDarkMode = null,Object? isPaused = null,}) {
   return _then(_BreathingState(
 phase: null == phase ? _self.phase : phase // ignore: cast_nullable_to_non_nullable
 as BreathingPhase,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as BreathingSession,currentRound: null == currentRound ? _self.currentRound : currentRound // ignore: cast_nullable_to_non_nullable
 as int,secondsRemaining: null == secondsRemaining ? _self.secondsRemaining : secondsRemaining // ignore: cast_nullable_to_non_nullable
 as int,isDarkMode: null == isDarkMode ? _self.isDarkMode : isDarkMode // ignore: cast_nullable_to_non_nullable
+as bool,isPaused: null == isPaused ? _self.isPaused : isPaused // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

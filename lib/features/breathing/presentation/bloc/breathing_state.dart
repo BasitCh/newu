@@ -13,5 +13,6 @@ abstract class BreathingState with _$BreathingState {
     @Default(0) int currentRound,
     @Default(0) int secondsRemaining,
     @Default(false) bool isDarkMode,
+    @Default(false) bool isPaused,
   }) = _BreathingState;
 }

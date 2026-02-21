@@ -21,6 +21,8 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
     on<ThemeToggled>(_onThemeToggled);
     on<StartExercise>(_onStartExercise);
     on<Tick>(_onTick);
+    on<Pause>(_onPause);
+    on<Resume>(_onResume);
     on<Reset>(_onReset);
   }
 
@@ -141,6 +143,24 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
         secondsRemaining: 0,
       ),
     );
+  }
+
+  void _onPause(Pause event, Emitter<BreathingState> emit) {
+    if (state.phase == BreathingPhase.setup ||
+        state.phase == BreathingPhase.finished) {
+      return;
+    }
+    _timer?.cancel();
+    emit(state.copyWith(isPaused: true));
+  }
+
+  void _onResume(Resume event, Emitter<BreathingState> emit) {
+    if (state.phase == BreathingPhase.setup ||
+        state.phase == BreathingPhase.finished) {
+      return;
+    }
+    emit(state.copyWith(isPaused: false));
+    _startTimer();
   }
 
   @override

@@ -11,5 +11,7 @@ abstract class BreathingEvent with _$BreathingEvent {
   const factory BreathingEvent.themeToggled() = ThemeToggled;
   const factory BreathingEvent.startExercise() = StartExercise;
   const factory BreathingEvent.tick() = Tick;
+  const factory BreathingEvent.pause() = Pause;
+  const factory BreathingEvent.resume() = Resume;
   const factory BreathingEvent.reset() = Reset;
 }

@@ -55,7 +55,7 @@ extension BreathingEventPatterns on BreathingEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Started value)?  started,TResult Function( SettingsChanged value)?  settingsChanged,TResult Function( ThemeToggled value)?  themeToggled,TResult Function( StartExercise value)?  startExercise,TResult Function( Tick value)?  tick,TResult Function( Reset value)?  reset,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Started value)?  started,TResult Function( SettingsChanged value)?  settingsChanged,TResult Function( ThemeToggled value)?  themeToggled,TResult Function( StartExercise value)?  startExercise,TResult Function( Tick value)?  tick,TResult Function( Pause value)?  pause,TResult Function( Resume value)?  resume,TResult Function( Reset value)?  reset,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case Started() when started != null:
@@ -63,7 +63,9 @@ return started(_that);case SettingsChanged() when settingsChanged != null:
 return settingsChanged(_that);case ThemeToggled() when themeToggled != null:
 return themeToggled(_that);case StartExercise() when startExercise != null:
 return startExercise(_that);case Tick() when tick != null:
-return tick(_that);case Reset() when reset != null:
+return tick(_that);case Pause() when pause != null:
+return pause(_that);case Resume() when resume != null:
+return resume(_that);case Reset() when reset != null:
 return reset(_that);case _:
   return orElse();
 
@@ -82,7 +84,7 @@ return reset(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Started value)  started,required TResult Function( SettingsChanged value)  settingsChanged,required TResult Function( ThemeToggled value)  themeToggled,required TResult Function( StartExercise value)  startExercise,required TResult Function( Tick value)  tick,required TResult Function( Reset value)  reset,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Started value)  started,required TResult Function( SettingsChanged value)  settingsChanged,required TResult Function( ThemeToggled value)  themeToggled,required TResult Function( StartExercise value)  startExercise,required TResult Function( Tick value)  tick,required TResult Function( Pause value)  pause,required TResult Function( Resume value)  resume,required TResult Function( Reset value)  reset,}){
 final _that = this;
 switch (_that) {
 case Started():
@@ -90,7 +92,9 @@ return started(_that);case SettingsChanged():
 return settingsChanged(_that);case ThemeToggled():
 return themeToggled(_that);case StartExercise():
 return startExercise(_that);case Tick():
-return tick(_that);case Reset():
+return tick(_that);case Pause():
+return pause(_that);case Resume():
+return resume(_that);case Reset():
 return reset(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -108,7 +112,7 @@ return reset(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Started value)?  started,TResult? Function( SettingsChanged value)?  settingsChanged,TResult? Function( ThemeToggled value)?  themeToggled,TResult? Function( StartExercise value)?  startExercise,TResult? Function( Tick value)?  tick,TResult? Function( Reset value)?  reset,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Started value)?  started,TResult? Function( SettingsChanged value)?  settingsChanged,TResult? Function( ThemeToggled value)?  themeToggled,TResult? Function( StartExercise value)?  startExercise,TResult? Function( Tick value)?  tick,TResult? Function( Pause value)?  pause,TResult? Function( Resume value)?  resume,TResult? Function( Reset value)?  reset,}){
 final _that = this;
 switch (_that) {
 case Started() when started != null:
@@ -116,7 +120,9 @@ return started(_that);case SettingsChanged() when settingsChanged != null:
 return settingsChanged(_that);case ThemeToggled() when themeToggled != null:
 return themeToggled(_that);case StartExercise() when startExercise != null:
 return startExercise(_that);case Tick() when tick != null:
-return tick(_that);case Reset() when reset != null:
+return tick(_that);case Pause() when pause != null:
+return pause(_that);case Resume() when resume != null:
+return resume(_that);case Reset() when reset != null:
 return reset(_that);case _:
   return null;
 
@@ -134,14 +140,16 @@ return reset(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( BreathingSession session)?  settingsChanged,TResult Function()?  themeToggled,TResult Function()?  startExercise,TResult Function()?  tick,TResult Function()?  reset,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( BreathingSession session)?  settingsChanged,TResult Function()?  themeToggled,TResult Function()?  startExercise,TResult Function()?  tick,TResult Function()?  pause,TResult Function()?  resume,TResult Function()?  reset,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Started() when started != null:
 return started();case SettingsChanged() when settingsChanged != null:
 return settingsChanged(_that.session);case ThemeToggled() when themeToggled != null:
 return themeToggled();case StartExercise() when startExercise != null:
 return startExercise();case Tick() when tick != null:
-return tick();case Reset() when reset != null:
+return tick();case Pause() when pause != null:
+return pause();case Resume() when resume != null:
+return resume();case Reset() when reset != null:
 return reset();case _:
   return orElse();
 
@@ -160,14 +168,16 @@ return reset();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( BreathingSession session)  settingsChanged,required TResult Function()  themeToggled,required TResult Function()  startExercise,required TResult Function()  tick,required TResult Function()  reset,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( BreathingSession session)  settingsChanged,required TResult Function()  themeToggled,required TResult Function()  startExercise,required TResult Function()  tick,required TResult Function()  pause,required TResult Function()  resume,required TResult Function()  reset,}) {final _that = this;
 switch (_that) {
 case Started():
 return started();case SettingsChanged():
 return settingsChanged(_that.session);case ThemeToggled():
 return themeToggled();case StartExercise():
 return startExercise();case Tick():
-return tick();case Reset():
+return tick();case Pause():
+return pause();case Resume():
+return resume();case Reset():
 return reset();case _:
   throw StateError('Unexpected subclass');
 
@@ -185,14 +195,16 @@ return reset();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( BreathingSession session)?  settingsChanged,TResult? Function()?  themeToggled,TResult? Function()?  startExercise,TResult? Function()?  tick,TResult? Function()?  reset,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( BreathingSession session)?  settingsChanged,TResult? Function()?  themeToggled,TResult? Function()?  startExercise,TResult? Function()?  tick,TResult? Function()?  pause,TResult? Function()?  resume,TResult? Function()?  reset,}) {final _that = this;
 switch (_that) {
 case Started() when started != null:
 return started();case SettingsChanged() when settingsChanged != null:
 return settingsChanged(_that.session);case ThemeToggled() when themeToggled != null:
 return themeToggled();case StartExercise() when startExercise != null:
 return startExercise();case Tick() when tick != null:
-return tick();case Reset() when reset != null:
+return tick();case Pause() when pause != null:
+return pause();case Resume() when resume != null:
+return resume();case Reset() when reset != null:
 return reset();case _:
   return null;
 
@@ -396,6 +408,70 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'BreathingEvent.tick()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class Pause implements BreathingEvent {
+  const Pause();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Pause);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'BreathingEvent.pause()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class Resume implements BreathingEvent {
+  const Resume();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Resume);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'BreathingEvent.resume()';
 }
 
 
