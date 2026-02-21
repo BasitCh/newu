@@ -39,7 +39,6 @@ class _BreathingView extends StatelessWidget {
           body: Stack(
             fit: StackFit.expand,
             children: [
-              // Exact translated background gradients from Android Vectors
               Container(
                 decoration: BoxDecoration(
                   color: isDark ? null : Colors.white,
@@ -66,7 +65,6 @@ class _BreathingView extends StatelessWidget {
                 ),
               ),
 
-              // 3. Stars for dark mode
               if (isDark)
                 Positioned.fill(
                   child: SvgPicture.asset(
@@ -75,7 +73,6 @@ class _BreathingView extends StatelessWidget {
                   ),
                 ),
 
-              // 4. Background Clouds
               if (isDark) ...[
                 Positioned(
                   top: -10,
@@ -134,7 +131,6 @@ class _BreathingView extends StatelessWidget {
                   ),
                 ),
               ] else ...[
-                // Top main cloud
                 Positioned(
                   top: 30,
                   right: -70,
@@ -143,31 +139,26 @@ class _BreathingView extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                   ),
                 ),
-                // Right middle cloud
                 Positioned(
                   top: 150,
                   right: -40,
                   child: SvgPicture.asset('assets/cloud _1.svg', width: 140),
                 ),
-                // Left middle cloud
                 Positioned(
                   top: 170,
                   left: -20,
                   child: SvgPicture.asset('assets/cloud _2.svg', width: 130),
                 ),
-                // Left lower cloud
                 Positioned(
                   top: 550,
                   left: -20,
                   child: SvgPicture.asset('assets/small_cloud.svg', width: 90),
                 ),
-                // Right lower cloud
                 Positioned(
                   top: 250,
                   right: -20,
                   child: SvgPicture.asset('assets/cloud _3.svg', width: 120),
                 ),
-                // Bottom clouds
                 Positioned(
                   bottom: 60,
                   right: -20,
@@ -188,7 +179,6 @@ class _BreathingView extends StatelessWidget {
                 ),
               ],
 
-              // 6. Content overlay
               SafeArea(child: _buildContent(state)),
             ],
           ),

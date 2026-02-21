@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../bloc/breathing_bloc.dart';
 import '../bloc/breathing_event.dart';
+import 'components/setup_view_components.dart';
 
 class SetupView extends StatefulWidget {
   const SetupView({super.key});
@@ -22,7 +23,6 @@ class _SetupViewState extends State<SetupView> {
     final state = context.watch<BreathingBloc>().state;
     final isDark = state.isDarkMode;
 
-    // Theme colors matching Figma
     final textColor = isDark ? Colors.white : const Color(0xFF1A1A1A);
     final secondaryTextColor = isDark
         ? Colors.white70
@@ -46,7 +46,6 @@ class _SetupViewState extends State<SetupView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Nav / Theme Toggle
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -71,7 +70,6 @@ class _SetupViewState extends State<SetupView> {
           ),
           const SizedBox(height: 8),
 
-          // Headers
           Text(
             isDark ? 'Set your pace' : 'Set your breathing pace',
             textAlign: TextAlign.center,
@@ -93,7 +91,6 @@ class _SetupViewState extends State<SetupView> {
           ),
           const SizedBox(height: 32),
 
-          // Central Card settings
           Expanded(
             child: SingleChildScrollView(
               child: Container(
@@ -117,7 +114,6 @@ class _SetupViewState extends State<SetupView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // --- BREATH DURATION ---
                     _buildSectionHeader(
                       'Breath duration',
                       'Seconds per phase',
@@ -160,7 +156,6 @@ class _SetupViewState extends State<SetupView> {
                     ),
                     const SizedBox(height: 32),
 
-                    // --- ROUNDS ---
                     _buildSectionHeader(
                       'Rounds',
                       isDark
@@ -193,7 +188,7 @@ class _SetupViewState extends State<SetupView> {
                                   final isSelected = session.rounds == val;
                                   return Padding(
                                     padding: const EdgeInsets.only(right: 8.0),
-                                    child: _buildSelectorPill(
+                                    child: SelectorPill(
                                       label: label,
                                       isSelected: isSelected,
                                       orangeColor: orangeColor,
@@ -214,13 +209,11 @@ class _SetupViewState extends State<SetupView> {
                     ),
                     const SizedBox(height: 32),
 
-                    // --- ADVANCED TIMING ---
                     GestureDetector(
                       onTap: () {
                         setState(() {
                           _isAdvancedExpanded = !_isAdvancedExpanded;
                           if (!_isAdvancedExpanded) {
-                            // Reset values to simple duration on collapse
                             context.read<BreathingBloc>().add(
                               BreathingEvent.settingsChanged(
                                 session.copyWith(
@@ -329,7 +322,6 @@ class _SetupViewState extends State<SetupView> {
                     ],
                     const SizedBox(height: 32),
 
-                    // --- SOUND ---
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -363,7 +355,6 @@ class _SetupViewState extends State<SetupView> {
 
           const SizedBox(height: 24),
 
-          // Start Button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: darkPurple,
@@ -395,164 +386,6 @@ class _SetupViewState extends State<SetupView> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildSectionHeader(
-    String title,
-    String subtitle,
-    Color textColor,
-    Color secondaryColor,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          title,
-          style: GoogleFonts.inter(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: textColor,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          subtitle,
-          style: GoogleFonts.inter(fontSize: 13, color: secondaryColor),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSelectorPill({
-    required String label,
-    required bool isSelected,
-    required Color orangeColor,
-    required Color pillColor,
-    required bool isDark,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? (isDark ? const Color(0xFF4A2B00) : const Color(0xFFFFF2E5))
-              : pillColor,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: isSelected ? orangeColor : Colors.transparent,
-            width: 1.5,
-          ),
-        ),
-        child: Text(
-          label,
-          style: GoogleFonts.inter(
-            color: isSelected
-                ? orangeColor
-                : (isDark ? Colors.white70 : const Color(0xFF8A8A8E)),
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-            fontSize: 14,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAdjusterRow(
-    String title,
-    int value,
-    Color pillColor,
-    Color textColor,
-    Function(int) onChanged,
-  ) {
-    final isDark = textColor == Colors.white;
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: pillColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: GoogleFonts.inter(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: textColor,
-            ),
-          ),
-          Row(
-            children: [
-              _buildStepperButton(
-                icon: Icons.remove,
-                color: textColor,
-                bgColor: isDark
-                    ? Colors.white.withValues(alpha: 0.1)
-                    : Colors.white,
-                onTap: () {
-                  if (value > 0) onChanged(value - 1);
-                },
-              ),
-              SizedBox(
-                width: 48,
-                child: Text(
-                  '${value}s',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: textColor,
-                  ),
-                ),
-              ),
-              _buildStepperButton(
-                icon: Icons.add,
-                color: textColor,
-                bgColor: isDark
-                    ? Colors.white.withValues(alpha: 0.1)
-                    : Colors.white,
-                onTap: () => onChanged(value + 1),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStepperButton({
-    required IconData icon,
-    required Color color,
-    required Color bgColor,
-    required VoidCallback onTap,
-  }) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: bgColor,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 4,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Icon(icon, size: 18, color: color),
-        ),
       ),
     );
   }

@@ -116,7 +116,6 @@ class _ExerciseViewState extends State<ExerciseView>
             break;
         }
 
-        // Calculate smooth progress
         double progress = 0.0;
         int totalRoundDuration =
             state.session.inhaleDuration +
@@ -152,7 +151,6 @@ class _ExerciseViewState extends State<ExerciseView>
           if (progress < 0) progress = 0;
           if (progress > 1) progress = 1;
 
-          // Also let's give the first loading screen progress if it's "ready", showing empty zero.
           if (state.phase == BreathingPhase.ready) progress = 0.0;
         }
 
@@ -162,7 +160,6 @@ class _ExerciseViewState extends State<ExerciseView>
 
         return Column(
           children: [
-            // Top Nav
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 24.0,
@@ -217,7 +214,6 @@ class _ExerciseViewState extends State<ExerciseView>
 
             const Spacer(flex: 3),
 
-            // Bubble Area
             SizedBox(
               height: 280,
               child: Center(
@@ -251,7 +247,6 @@ class _ExerciseViewState extends State<ExerciseView>
 
             const SizedBox(height: 32),
 
-            // Text Prompts
             Text(
               title,
               style: GoogleFonts.inter(
@@ -269,7 +264,6 @@ class _ExerciseViewState extends State<ExerciseView>
 
             const SizedBox(height: 48),
 
-            // Progress Bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 48.0),
               child: Column(
@@ -291,7 +285,6 @@ class _ExerciseViewState extends State<ExerciseView>
                             child: Stack(
                               alignment: Alignment.centerLeft,
                               children: [
-                                // Background Track
                                 Container(
                                   width: width,
                                   height: trackHeight,
@@ -304,7 +297,6 @@ class _ExerciseViewState extends State<ExerciseView>
                                     ),
                                   ),
                                 ),
-                                // Active Track
                                 Container(
                                   width: activeWidth,
                                   height: trackHeight,
@@ -315,7 +307,6 @@ class _ExerciseViewState extends State<ExerciseView>
                                     ),
                                   ),
                                 ),
-                                // Thumb
                                 Positioned(
                                   left: activeWidth - thumbRadius < 0
                                       ? 0
@@ -353,7 +344,6 @@ class _ExerciseViewState extends State<ExerciseView>
 
             const Spacer(),
 
-            // Pause/Resume Button
             GestureDetector(
               onTap: () {
                 if (state.isPaused) {
