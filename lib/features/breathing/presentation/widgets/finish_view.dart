@@ -10,46 +10,66 @@ class FinishView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.watch<BreathingBloc>().state.isDarkMode;
-    final textColor = isDark ? Colors.white : Colors.black;
+    final textColor = isDark ? Colors.white : const Color(0xFF1A1A1A);
+    final secondaryTextColor = isDark
+        ? Colors.white70
+        : const Color(0xFF666666);
 
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            padding: const EdgeInsets.all(24),
-            decoration: const BoxDecoration(
-              color: Colors.green,
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(Icons.check, color: Colors.white, size: 64),
+          const Spacer(),
+          Column(
+            children: [
+              Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? const Color(0xFF5DBB63).withOpacity(0.2)
+                      : const Color(0xFFE2F0E5),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.check,
+                  color: isDark
+                      ? const Color(0xFF5DBB63)
+                      : const Color(0xFF458B4A),
+                  size: 64,
+                ),
+              ),
+              const SizedBox(height: 32),
+              Text(
+                'You did it!',
+                style: GoogleFonts.inter(
+                  fontSize: 36,
+                  fontWeight: FontWeight.w700,
+                  color: textColor,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'We hope you enjoyed \nthe breathing session.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontSize: 18,
+                  height: 1.4,
+                  color: secondaryTextColor,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 24),
-          Text(
-            'You did it!',
-            style: GoogleFonts.inter(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: textColor,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'We hope you enjoyed \nthe breathing session.',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              color: textColor.withOpacity(0.7),
-            ),
-          ),
-          const SizedBox(height: 64),
+          const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF630068),
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(40),
               ),
             ),
             onPressed: () {
@@ -67,18 +87,24 @@ class FinishView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           TextButton(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+            ),
             onPressed: () {
               context.read<BreathingBloc>().add(const BreathingEvent.reset());
             },
             child: Text(
               'Back to set up',
               style: GoogleFonts.inter(
-                fontSize: 16,
-                color: const Color(0xFF630068),
+                fontSize: 18,
+                color: isDark
+                    ? const Color(0xFFD699DC)
+                    : const Color(0xFF630068),
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
+          const SizedBox(height: 32),
         ],
       ),
     );

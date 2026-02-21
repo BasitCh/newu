@@ -34,17 +34,64 @@ class _BreathingView extends StatelessWidget {
     return BlocBuilder<BreathingBloc, BreathingState>(
       builder: (context, state) {
         final isDark = state.isDarkMode;
-        final bgAsset = isDark
-            ? 'assets/dark_mode_bg.svg'
-            : 'assets/light_background.svg';
 
         return Scaffold(
           body: Stack(
             fit: StackFit.expand,
             children: [
-              // Background
-              SvgPicture.asset(bgAsset, fit: BoxFit.cover),
-              // Content
+              // 1. Solid Background Color (Fallback/Base)
+              Container(
+                color: isDark
+                    ? const Color(0xFF1F1135)
+                    : const Color(0xFFFAF7F2),
+              ),
+
+              // 2. SVG Background Gradient
+              SvgPicture.asset(
+                isDark
+                    ? 'assets/dark_mode_bg.svg'
+                    : 'assets/light_background.svg',
+                fit: BoxFit.cover,
+              ),
+
+              // 3. Stars for dark mode
+              if (isDark)
+                Positioned.fill(
+                  child: SvgPicture.asset(
+                    'assets/stars.svg',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+
+              // 4. Background Clouds (Medium Bottom Cloud)
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: SvgPicture.asset(
+                  isDark
+                      ? 'assets/dark_mode_meduim.svg'
+                      : 'assets/medium_bottom_cloud.svg',
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.bottomCenter,
+                ),
+              ),
+
+              // 5. Background Clouds (Bottom Cloud)
+              Positioned(
+                bottom: -20, // slightly offset to overlap
+                left: -20,
+                right: -20,
+                child: SvgPicture.asset(
+                  isDark
+                      ? 'assets/dark_mode_cloud.svg'
+                      : 'assets/bottom_cloud.svg',
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.bottomCenter,
+                ),
+              ),
+
+              // 6. Content overlay
               SafeArea(child: _buildContent(state)),
             ],
           ),
