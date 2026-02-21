@@ -119,37 +119,48 @@ class _BreathingView extends StatelessWidget {
                   ),
                 ),
               ] else ...[
+                // Top main cloud
+                Positioned(
+                  top: -60,
+                  left: -50,
+                  right: -50,
+                  child: SvgPicture.asset(
+                    'assets/big_cloud.svg',
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                // Right middle cloud
                 Positioned(
                   top: 150,
-                  right: -30,
-                  child: SvgPicture.asset('assets/cloud _1.svg', width: 106),
-                ),
-                Positioned(
-                  top: 250,
-                  right: -10,
-                  child: SvgPicture.asset('assets/cloud _2.svg', width: 117),
-                ),
-                Positioned(
-                  top: 200,
-                  left: -50,
-                  child: SvgPicture.asset('assets/cloud _3.svg', width: 106),
-                ),
-                Positioned(
-                  top: 320,
-                  left: -60,
-                  child: SvgPicture.asset('assets/big_cloud.svg', width: 304),
-                ),
-                Positioned(
-                  top: 120,
-                  left: 20,
-                  child: SvgPicture.asset('assets/small_cloud.svg', width: 80),
-                ),
-                Positioned(
-                  bottom: 50,
                   right: -40,
+                  child: SvgPicture.asset('assets/cloud _1.svg', width: 140),
+                ),
+                // Left middle cloud
+                Positioned(
+                  top: 220,
+                  left: -50,
+                  child: SvgPicture.asset('assets/cloud _3.svg', width: 130),
+                ),
+                // Left lower cloud
+                Positioned(
+                  top: 550,
+                  left: -20,
+                  child: SvgPicture.asset('assets/small_cloud.svg', width: 90),
+                ),
+                // Right lower cloud
+                Positioned(
+                  bottom: 250,
+                  right: -20,
+                  child: SvgPicture.asset('assets/cloud _2.svg', width: 120),
+                ),
+                // Bottom clouds
+                Positioned(
+                  bottom: 60,
+                  right: -20,
+                  left: 60,
                   child: SvgPicture.asset(
                     'assets/medium_bottom_cloud.svg',
-                    width: 340,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
                 Positioned(

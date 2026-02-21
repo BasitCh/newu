@@ -465,47 +465,91 @@ class _SetupViewState extends State<SetupView> {
     Color textColor,
     Function(int) onChanged,
   ) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: GoogleFonts.inter(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-            color: textColor,
+    final isDark = textColor == Colors.white;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: pillColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.inter(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: textColor,
+            ),
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: pillColor,
-            borderRadius: BorderRadius.circular(24),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
+          Row(
             children: [
-              GestureDetector(
-                onTap: () => onChanged(value - 1),
-                child: Icon(Icons.remove, size: 20, color: textColor),
+              _buildStepperButton(
+                icon: Icons.remove,
+                color: textColor,
+                bgColor: isDark
+                    ? Colors.white.withValues(alpha: 0.1)
+                    : Colors.white,
+                onTap: () {
+                  if (value > 0) onChanged(value - 1);
+                },
               ),
-              const SizedBox(width: 24),
-              Text(
-                '${value}s',
-                style: GoogleFonts.inter(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: textColor,
+              SizedBox(
+                width: 48,
+                child: Text(
+                  '${value}s',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: textColor,
+                  ),
                 ),
               ),
-              const SizedBox(width: 24),
-              GestureDetector(
+              _buildStepperButton(
+                icon: Icons.add,
+                color: textColor,
+                bgColor: isDark
+                    ? Colors.white.withValues(alpha: 0.1)
+                    : Colors.white,
                 onTap: () => onChanged(value + 1),
-                child: Icon(Icons.add, size: 20, color: textColor),
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStepperButton({
+    required IconData icon,
+    required Color color,
+    required Color bgColor,
+    required VoidCallback onTap,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: bgColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Icon(icon, size: 18, color: color),
         ),
-      ],
+      ),
     );
   }
 }
