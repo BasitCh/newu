@@ -7,7 +7,6 @@ import 'breathing_state.dart';
 import '../../domain/usecases/get_breathing_settings.dart';
 import '../../domain/usecases/save_breathing_settings.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../../domain/entities/breathing_session.dart';
 
 @injectable
 class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
@@ -63,8 +62,9 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
 
   void _onTick(Tick event, Emitter<BreathingState> emit) {
     if (state.phase == BreathingPhase.setup ||
-        state.phase == BreathingPhase.finished)
+        state.phase == BreathingPhase.finished) {
       return;
+    }
 
     int newSeconds = state.secondsRemaining - 1;
 
