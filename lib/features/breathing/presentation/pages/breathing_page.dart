@@ -75,33 +75,93 @@ class _BreathingView extends StatelessWidget {
                   ),
                 ),
 
-              // 4. Background Clouds (Medium Bottom Cloud)
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: SvgPicture.asset(
-                  isDark
-                      ? 'assets/dark_mode_meduim.svg'
-                      : 'assets/medium_bottom_cloud.svg',
-                  fit: BoxFit.fitWidth,
-                  alignment: Alignment.bottomCenter,
+              // 4. Background Clouds
+              if (isDark) ...[
+                Positioned(
+                  top: 200,
+                  right: -40,
+                  child: SvgPicture.asset(
+                    'assets/dark_small_cloud_1.svg',
+                    width: 110,
+                  ),
                 ),
-              ),
-
-              // 5. Background Clouds (Bottom Cloud)
-              Positioned(
-                bottom: -20, // slightly offset to overlap
-                left: -20,
-                right: -20,
-                child: SvgPicture.asset(
-                  isDark
-                      ? 'assets/dark_mode_cloud.svg'
-                      : 'assets/bottom_cloud.svg',
-                  fit: BoxFit.fitWidth,
-                  alignment: Alignment.bottomCenter,
+                Positioned(
+                  top: 300,
+                  left: -20,
+                  child: SvgPicture.asset(
+                    'assets/dark_small_cloud_2.svg',
+                    width: 91,
+                  ),
                 ),
-              ),
+                Positioned(
+                  bottom: 120,
+                  left: -30,
+                  child: SvgPicture.asset(
+                    'assets/dark_ cloud_1.svg',
+                    width: 106,
+                  ),
+                ),
+                Positioned(
+                  bottom: 180,
+                  right: 20,
+                  child: SvgPicture.asset(
+                    'assets/dark_ cloud_2.svg',
+                    width: 106,
+                  ),
+                ),
+                Positioned(
+                  bottom: -20,
+                  left: -20,
+                  right: -20,
+                  child: SvgPicture.asset(
+                    'assets/dark_mode_cloud.svg',
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+              ] else ...[
+                Positioned(
+                  top: 150,
+                  right: -30,
+                  child: SvgPicture.asset('assets/cloud _1.svg', width: 106),
+                ),
+                Positioned(
+                  top: 250,
+                  right: -10,
+                  child: SvgPicture.asset('assets/cloud _2.svg', width: 117),
+                ),
+                Positioned(
+                  top: 200,
+                  left: -50,
+                  child: SvgPicture.asset('assets/cloud _3.svg', width: 106),
+                ),
+                Positioned(
+                  top: 320,
+                  left: -60,
+                  child: SvgPicture.asset('assets/big_cloud.svg', width: 304),
+                ),
+                Positioned(
+                  top: 120,
+                  left: 20,
+                  child: SvgPicture.asset('assets/small_cloud.svg', width: 80),
+                ),
+                Positioned(
+                  bottom: 50,
+                  right: -40,
+                  child: SvgPicture.asset(
+                    'assets/medium_bottom_cloud.svg',
+                    width: 340,
+                  ),
+                ),
+                Positioned(
+                  bottom: -20,
+                  left: -20,
+                  right: -20,
+                  child: SvgPicture.asset(
+                    'assets/bottom_cloud.svg',
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+              ],
 
               // 6. Content overlay
               SafeArea(child: _buildContent(state)),

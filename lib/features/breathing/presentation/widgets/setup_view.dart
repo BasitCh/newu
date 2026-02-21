@@ -71,7 +71,7 @@ class _SetupViewState extends State<SetupView> {
 
           // Headers
           Text(
-            'Set your breathing pace',
+            isDark ? 'Set your pace' : 'Set your breathing pace',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: 28,
@@ -107,6 +107,9 @@ class _SetupViewState extends State<SetupView> {
                             offset: const Offset(0, 8),
                           ),
                         ],
+                  border: isDark
+                      ? null
+                      : Border.all(color: Colors.white, width: 2),
                 ),
                 padding: const EdgeInsets.all(24),
                 child: Column(
@@ -123,7 +126,7 @@ class _SetupViewState extends State<SetupView> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: [3, 4, 5, 6].map((dur) {
+                        children: [3, 4, 5, 10].map((dur) {
                           final isSelected = _simpleDuration == dur;
                           return Padding(
                             padding: const EdgeInsets.only(right: 8.0),
@@ -158,7 +161,9 @@ class _SetupViewState extends State<SetupView> {
                     // --- ROUNDS ---
                     _buildSectionHeader(
                       'Rounds',
-                      'Full box breathing cycles',
+                      isDark
+                          ? 'Full box breathing cycles'
+                          : 'Full breathing cycles,',
                       textColor,
                       secondaryTextColor,
                     ),
@@ -167,33 +172,42 @@ class _SetupViewState extends State<SetupView> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children:
-                            [
-                              {'val': 2, 'label': '2 quick'},
-                              {'val': 4, 'label': '4 calm'},
-                              {'val': 6, 'label': '6 deep'},
-                              {'val': 8, 'label': '8 zen'},
-                            ].map((item) {
-                              final val = item['val'] as int;
-                              final label = item['label'] as String;
-                              final isSelected = session.rounds == val;
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: _buildSelectorPill(
-                                  label: label,
-                                  isSelected: isSelected,
-                                  orangeColor: orangeColor,
-                                  pillColor: pillColor,
-                                  isDark: isDark,
-                                  onTap: () {
-                                    context.read<BreathingBloc>().add(
-                                      BreathingEvent.settingsChanged(
-                                        session.copyWith(rounds: val),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              );
-                            }).toList(),
+                            (isDark
+                                    ? [
+                                        {'val': 2, 'label': '2 quick'},
+                                        {'val': 4, 'label': '4 calm'},
+                                        {'val': 6, 'label': '6 deep'},
+                                        {'val': 8, 'label': '8 zen'},
+                                      ]
+                                    : [
+                                        {'val': 2, 'label': '2 min'},
+                                        {'val': 4, 'label': '4 min'},
+                                        {'val': 6, 'label': '6 min'},
+                                        {'val': 8, 'label': '8 min'},
+                                      ])
+                                .map((item) {
+                                  final val = item['val'] as int;
+                                  final label = item['label'] as String;
+                                  final isSelected = session.rounds == val;
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: _buildSelectorPill(
+                                      label: label,
+                                      isSelected: isSelected,
+                                      orangeColor: orangeColor,
+                                      pillColor: pillColor,
+                                      isDark: isDark,
+                                      onTap: () {
+                                        context.read<BreathingBloc>().add(
+                                          BreathingEvent.settingsChanged(
+                                            session.copyWith(rounds: val),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                })
+                                .toList(),
                       ),
                     ),
                     const SizedBox(height: 32),
