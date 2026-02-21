@@ -4,7 +4,7 @@ import '../../domain/entities/breathing_session.dart';
 part 'breathing_event.freezed.dart';
 
 @freezed
-class BreathingEvent with _$BreathingEvent {
+abstract class BreathingEvent with _$BreathingEvent {
   const factory BreathingEvent.started() = Started;
   const factory BreathingEvent.settingsChanged(BreathingSession session) =
       SettingsChanged;

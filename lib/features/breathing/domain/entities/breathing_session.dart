@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'breathing_session.freezed.dart';
 
 @freezed
-class BreathingSession with _$BreathingSession {
+abstract class BreathingSession with _$BreathingSession {
   const factory BreathingSession({
     @Default(4) int inhaleDuration,
     @Default(0) int holdInDuration,
