@@ -47,12 +47,12 @@ class FinishView extends StatelessWidget {
                             size: 60,
                           ),
                         ),
-                        Lottie.asset(
-                          'assets/animation.lottie',
-                          width: 200,
-                          height: 200,
-                          repeat: false,
-                        ),
+                        // Lottie.asset(
+                        //   'assets/animation.lottie',
+                        //   width: 200,
+                        //   height: 200,
+                        //   repeat: false,
+                        // ),
                       ],
                     ),
                   ),

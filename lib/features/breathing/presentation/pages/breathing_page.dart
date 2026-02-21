@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../core/presentation/widgets/responsive_layout.dart';
 import '../../../../injection.dart';
 import '../bloc/breathing_bloc.dart';
 import '../bloc/breathing_event.dart';
@@ -18,10 +17,7 @@ class BreathingPage extends StatelessWidget {
     return BlocProvider(
       create: (_) =>
           getIt<BreathingBloc>()..add(const BreathingEvent.started()),
-      child: const ResponsiveLayout(
-        mobile: _BreathingView(),
-        desktop: CenteredMobileLayout(child: _BreathingView()),
-      ),
+      child: const _BreathingView(),
     );
   }
 }
@@ -179,7 +175,13 @@ class _BreathingView extends StatelessWidget {
                 ),
               ],
 
-              SafeArea(child: _buildContent(state)),
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 450),
+                  child: SafeArea(child: _buildContent(state)),
+                ),
+              ),
             ],
           ),
         );
