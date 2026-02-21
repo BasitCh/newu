@@ -182,6 +182,66 @@ class _BreathingView extends StatelessWidget {
                   child: SafeArea(child: _buildContent(state)),
                 ),
               ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: SafeArea(
+                  child: IgnorePointer(
+                    ignoring: false,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0,
+                        vertical: 16.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (state.phase != BreathingPhase.setup)
+                            GestureDetector(
+                              onTap: () {
+                                context.read<BreathingBloc>().add(
+                                  const BreathingEvent.reset(),
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                child: Icon(
+                                  Icons.close,
+                                  color: isDark
+                                      ? Colors.white70
+                                      : const Color(0xFF8A8A8E),
+                                  size: 28,
+                                ),
+                              ),
+                            )
+                          else
+                            const SizedBox(width: 44),
+                          GestureDetector(
+                            onTap: () {
+                              context.read<BreathingBloc>().add(
+                                const BreathingEvent.themeToggled(),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              child: Icon(
+                                isDark
+                                    ? Icons.light_mode_outlined
+                                    : Icons.dark_mode_outlined,
+                                color: isDark
+                                    ? Colors.white
+                                    : const Color(0xFF8A8A8E),
+                                size: 28,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         );

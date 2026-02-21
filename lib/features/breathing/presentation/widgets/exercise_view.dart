@@ -160,48 +160,6 @@ class _ExerciseViewState extends State<ExerciseView>
 
         return Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24.0,
-                vertical: 8.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      context.read<BreathingBloc>().add(
-                        const BreathingEvent.reset(),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      child: Icon(
-                        CupertinoIcons.clear,
-                        color: subtitleColor,
-                        size: 24,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      context.read<BreathingBloc>().add(
-                        const BreathingEvent.themeToggled(),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      child: Icon(
-                        isDark ? CupertinoIcons.sun_max : CupertinoIcons.moon,
-                        color: subtitleColor,
-                        size: 24,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
             const SizedBox(height: 16),
             Text(
               "You're a natural",

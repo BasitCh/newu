@@ -47,12 +47,6 @@ class FinishView extends StatelessWidget {
                             size: 60,
                           ),
                         ),
-                        // Lottie.asset(
-                        //   'assets/animation.lottie',
-                        //   width: 200,
-                        //   height: 200,
-                        //   repeat: false,
-                        // ),
                       ],
                     ),
                   ),
@@ -159,31 +153,6 @@ class FinishView extends StatelessWidget {
               ),
               const SizedBox(height: 32),
             ],
-          ),
-        ),
-        Positioned(
-          top: 48,
-          right: 24,
-          child: GestureDetector(
-            onTap: () {
-              context.read<BreathingBloc>().add(
-                const BreathingEvent.themeToggled(),
-              );
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: isDark
-                    ? Colors.white.withValues(alpha: 0.1)
-                    : Colors.black.withValues(alpha: 0.05),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
-                color: textColor,
-                size: 24,
-              ),
-            ),
           ),
         ),
       ],

@@ -44,30 +44,6 @@ class _SetupViewState extends State<SetupView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  context.read<BreathingBloc>().add(
-                    const BreathingEvent.themeToggled(),
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  child: Icon(
-                    isDark
-                        ? CupertinoIcons.sun_max_fill
-                        : CupertinoIcons.moon_fill,
-                    color: isDark ? Colors.amber : const Color(0xFF8A8A8E),
-                    size: 24,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-
           Text(
             isDark ? 'Set your pace' : 'Set your breathing pace',
             textAlign: TextAlign.center,
