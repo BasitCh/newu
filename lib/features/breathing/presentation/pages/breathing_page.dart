@@ -39,19 +39,31 @@ class _BreathingView extends StatelessWidget {
           body: Stack(
             fit: StackFit.expand,
             children: [
-              // 1. Solid Background Color (Fallback/Base)
+              // Exact translated background gradients from Android Vectors
               Container(
-                color: isDark
-                    ? const Color(0xFF1F1135)
-                    : const Color(0xFFFAF7F2),
-              ),
-
-              // 2. SVG Background Gradient
-              SvgPicture.asset(
-                isDark
-                    ? 'assets/dark_mode_bg.svg'
-                    : 'assets/light_background.svg',
-                fit: BoxFit.cover,
+                decoration: BoxDecoration(
+                  color: isDark ? null : Colors.white,
+                  gradient: isDark
+                      ? const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.0, 0.4, 1.0],
+                          colors: [
+                            Color(0xFF1A1128),
+                            Color(0xFF2D1B4E),
+                            Color(0xFF3A2260),
+                          ],
+                        )
+                      : LinearGradient(
+                          transform: const GradientRotation(
+                            74.192 * 3.1415926535 / 180,
+                          ),
+                          colors: [
+                            const Color(0xFF630068).withValues(alpha: 0.08),
+                            const Color(0xFFFF8A00).withValues(alpha: 0.08),
+                          ],
+                        ),
+                ),
               ),
 
               // 3. Stars for dark mode
