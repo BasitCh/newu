@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+
 import '../bloc/breathing_bloc.dart';
 import '../bloc/breathing_event.dart';
 
@@ -13,7 +15,7 @@ class FinishView extends StatelessWidget {
     final textColor = isDark ? Colors.white : const Color(0xFF1A1A1A);
     final secondaryTextColor = isDark
         ? Colors.white70
-        : const Color(0xFF666666);
+        : const Color(0xFF8A8A8E);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
@@ -24,40 +26,41 @@ class FinishView extends StatelessWidget {
           const Spacer(),
           Column(
             children: [
-              Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  color: isDark
-                      ? const Color(0xFF5DBB63).withOpacity(0.2)
-                      : const Color(0xFFE2F0E5),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.check,
-                  color: isDark
-                      ? const Color(0xFF5DBB63)
-                      : const Color(0xFF458B4A),
-                  size: 64,
-                ),
+              // Lottie Animation
+              Lottie.network(
+                'https://lottie.host/471a629b-2191-4194-9e22-c1c7503db269/p940kXU72Y.lottie',
+                width: 140,
+                height: 140,
+                repeat: false,
               ),
-              const SizedBox(height: 32),
-              Text(
-                'You did it!',
-                style: GoogleFonts.inter(
-                  fontSize: 36,
-                  fontWeight: FontWeight.w700,
-                  color: textColor,
+              const SizedBox(height: 24),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'You did it! ',
+                      style: GoogleFonts.inter(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
+                        color: textColor,
+                      ),
+                    ),
+                    const TextSpan(text: '🎉', style: TextStyle(fontSize: 28)),
+                  ],
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
-                'We hope you enjoyed \nthe breathing session.',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
-                  fontSize: 18,
-                  height: 1.4,
-                  color: secondaryTextColor,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: Text(
+                  'Great rounds of calm, just like that. Your mind thanks you.',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    fontSize: 14,
+                    height: 1.5,
+                    color: secondaryTextColor,
+                  ),
                 ),
               ),
             ],
@@ -65,30 +68,48 @@ class FinishView extends StatelessWidget {
           const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF630068),
+              backgroundColor: isDark
+                  ? const Color(0xFF7A3476)
+                  : const Color(0xFF630068),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(40),
               ),
+              elevation: 0,
             ),
             onPressed: () {
               context.read<BreathingBloc>().add(
                 const BreathingEvent.startExercise(),
               );
             },
-            child: Text(
-              'Start again',
-              style: GoogleFonts.inter(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Start again',
+                  style: GoogleFonts.inter(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const Icon(Icons.air_rounded, size: 20, color: Colors.white),
+              ],
             ),
           ),
           const SizedBox(height: 16),
-          TextButton(
-            style: TextButton.styleFrom(
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: isDark
+                  ? const Color(0xFF3E3E3E)
+                  : const Color(0xFFF2F2F7),
+              foregroundColor: isDark ? Colors.white : const Color(0xFF1A1A1A),
               padding: const EdgeInsets.symmetric(vertical: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40),
+              ),
+              elevation: 0,
             ),
             onPressed: () {
               context.read<BreathingBloc>().add(const BreathingEvent.reset());
@@ -96,10 +117,7 @@ class FinishView extends StatelessWidget {
             child: Text(
               'Back to set up',
               style: GoogleFonts.inter(
-                fontSize: 18,
-                color: isDark
-                    ? const Color(0xFFD699DC)
-                    : const Color(0xFF630068),
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
             ),

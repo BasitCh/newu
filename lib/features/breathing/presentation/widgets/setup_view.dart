@@ -439,7 +439,9 @@ class _SetupViewState extends State<SetupView> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
-          color: (isSelected && !isDark) ? Colors.transparent : pillColor,
+          color: isSelected
+              ? (isDark ? const Color(0xFF4A2B00) : const Color(0xFFFFF2E5))
+              : pillColor,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: isSelected ? orangeColor : Colors.transparent,

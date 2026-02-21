@@ -249,7 +249,7 @@ class _ExerciseViewState extends State<ExerciseView>
               ),
             ),
 
-            const Spacer(flex: 2),
+            const SizedBox(height: 32),
 
             // Text Prompts
             Text(
@@ -258,9 +258,10 @@ class _ExerciseViewState extends State<ExerciseView>
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
                 color: textColor,
+                height: 1.2,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Text(
               subtitle,
               style: GoogleFonts.inter(fontSize: 14, color: subtitleColor),
@@ -278,22 +279,66 @@ class _ExerciseViewState extends State<ExerciseView>
                     curve: Curves.linear,
                     tween: Tween<double>(begin: progress, end: progress),
                     builder: (context, value, _) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: LinearProgressIndicator(
-                          value: value,
-                          minHeight: 4,
-                          backgroundColor: isDark
-                              ? const Color(0xFF23143B)
-                              : const Color(0xFFF2F2F7),
-                          valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color(0xFFD64D3A), // Rust orange exactly from img
-                          ),
-                        ),
+                      return LayoutBuilder(
+                        builder: (context, constraints) {
+                          final width = constraints.maxWidth;
+                          final thumbRadius = 4.0;
+                          final trackHeight = 3.0;
+                          final activeWidth = width * value;
+
+                          return SizedBox(
+                            height: 12,
+                            child: Stack(
+                              alignment: Alignment.centerLeft,
+                              children: [
+                                // Background Track
+                                Container(
+                                  width: width,
+                                  height: trackHeight,
+                                  decoration: BoxDecoration(
+                                    color: isDark
+                                        ? const Color(0xFF23143B)
+                                        : const Color(0xFFF2F2F7),
+                                    borderRadius: BorderRadius.circular(
+                                      trackHeight / 2,
+                                    ),
+                                  ),
+                                ),
+                                // Active Track
+                                Container(
+                                  width: activeWidth,
+                                  height: trackHeight,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFD64D3A),
+                                    borderRadius: BorderRadius.circular(
+                                      trackHeight / 2,
+                                    ),
+                                  ),
+                                ),
+                                // Thumb
+                                Positioned(
+                                  left: activeWidth - thumbRadius < 0
+                                      ? 0
+                                      : activeWidth - thumbRadius,
+                                  child: Container(
+                                    width: thumbRadius * 2,
+                                    height: thumbRadius * 2,
+                                    decoration: BoxDecoration(
+                                      color: isDark
+                                          ? const Color(0xFFF96451)
+                                          : const Color(0xFFD64D3A),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 4),
                   Text(
                     'Cycle ${state.currentRound > 0 ? state.currentRound : 1} of ${state.session.rounds}',
                     style: GoogleFonts.inter(
@@ -328,8 +373,8 @@ class _ExerciseViewState extends State<ExerciseView>
                 ),
                 decoration: BoxDecoration(
                   color: isDark
-                      ? const Color(0xFF4C3073).withOpacity(0.5)
-                      : const Color(0xFFF2F2F7),
+                      ? const Color(0xFF4C3073)
+                      : const Color(0xFFE7D5E4),
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Row(
@@ -337,8 +382,8 @@ class _ExerciseViewState extends State<ExerciseView>
                   children: [
                     Icon(
                       state.isPaused
-                          ? CupertinoIcons.play
-                          : CupertinoIcons.pause,
+                          ? CupertinoIcons.play_arrow_solid
+                          : CupertinoIcons.pause_solid,
                       color: textColor,
                       size: 16,
                     ),

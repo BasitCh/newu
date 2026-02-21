@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import 'breathing_event.dart';
 import 'breathing_state.dart';
@@ -12,6 +13,7 @@ import '../../../../core/usecases/usecase.dart';
 class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
   final GetBreathingSettings getBreathingSettings;
   final SaveBreathingSettings saveBreathingSettings;
+  final AudioPlayer _audioPlayer = AudioPlayer();
   Timer? _timer;
 
   BreathingBloc(this.getBreathingSettings, this.saveBreathingSettings)
@@ -116,6 +118,13 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
         break;
     }
 
+    if (nextPhase != state.phase &&
+        nextPhase != BreathingPhase.setup &&
+        nextPhase != BreathingPhase.ready &&
+        nextPhase != BreathingPhase.finished) {
+      _audioPlayer.play(AssetSource('chime.wav'));
+    }
+
     emit(state.copyWith(phase: nextPhase, secondsRemaining: nextSeconds));
   }
 
@@ -124,6 +133,7 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
       _timer?.cancel();
       emit(state.copyWith(phase: BreathingPhase.finished));
     } else {
+      _audioPlayer.play(AssetSource('chime.wav'));
       emit(
         state.copyWith(
           phase: BreathingPhase.inhale,
@@ -136,6 +146,7 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
 
   void _onReset(Reset event, Emitter<BreathingState> emit) {
     _timer?.cancel();
+    _audioPlayer.stop();
     emit(
       state.copyWith(
         phase: BreathingPhase.setup,
@@ -166,6 +177,7 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
   @override
   Future<void> close() {
     _timer?.cancel();
+    _audioPlayer.dispose();
     return super.close();
   }
 }

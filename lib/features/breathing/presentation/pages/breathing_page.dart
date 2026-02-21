@@ -80,42 +80,57 @@ class _BreathingView extends StatelessWidget {
                 Positioned(
                   top: -10,
                   left: -20,
-                  child: SvgPicture.asset(
-                    'assets/dark_small_cloud_1.svg',
-                    width: 160,
+                  child: Opacity(
+                    opacity: 0.15,
+                    child: SvgPicture.asset(
+                      'assets/dark_small_cloud_1.svg',
+                      width: 160,
+                    ),
                   ),
                 ),
                 Positioned(
                   top: 150,
                   right: -10,
-                  child: SvgPicture.asset(
-                    'assets/dark_small_cloud_2.svg',
-                    width: 100,
+                  child: Opacity(
+                    opacity: 0.15,
+                    child: SvgPicture.asset(
+                      'assets/dark_small_cloud_2.svg',
+                      width: 100,
+                    ),
                   ),
                 ),
                 Positioned(
                   top: 450,
                   left: -30,
-                  child: SvgPicture.asset(
-                    'assets/dark_ cloud_1.svg',
-                    width: 140,
+                  child: Opacity(
+                    opacity: 0.15,
+                    child: SvgPicture.asset(
+                      'assets/dark_ cloud_1.svg',
+                      width: 140,
+                    ),
                   ),
                 ),
                 Positioned(
                   bottom: 200,
                   right: -20,
-                  child: SvgPicture.asset(
-                    'assets/dark_ cloud_2.svg',
-                    width: 120,
+                  child: Opacity(
+                    opacity: 0.15,
+                    child: SvgPicture.asset(
+                      'assets/dark_ cloud_2.svg',
+                      width: 120,
+                    ),
                   ),
                 ),
                 Positioned(
                   bottom: -20,
                   left: -20,
                   right: -20,
-                  child: SvgPicture.asset(
-                    'assets/dark_mode_cloud.svg',
-                    fit: BoxFit.fitWidth,
+                  child: Opacity(
+                    opacity: 0.15,
+                    child: SvgPicture.asset(
+                      'assets/dark_mode_cloud.svg',
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ),
               ] else ...[
