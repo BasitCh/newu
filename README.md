@@ -2,6 +2,23 @@ NewU Breathing App
 
 A pixel-perfect, responsive Flutter Web/Mobile application that provides guided breathing exercises (like Box Breathing) to help users find calm and focus.
 
+## 🚀 Live Demo & Deployment
+- **Live URL**: [https://web-ashen-three-89.vercel.app](https://web-ashen-three-89.vercel.app)
+
+The app is fully optimized and ready to deploy to the **Vercel Free Tier** directly from this codebase. Since Vercel requires personal terminal authentication or a GitHub linkage to host a project, you can easily launch it yourself in two simple steps:
+
+1. **Build the production web app:**
+   ```bash
+   flutter build web --release
+   ```
+2. **Deploy to Vercel (Ensure Node/Vercel CLI is installed):**
+   ```bash
+   cd build/web
+   npx vercel --prod
+   ```
+
+*(Alternatively, you can just drag and drop the `build/web` folder straight into the Vercel Dashboard in your browser!)*
+
 Features Implemented
 
 * **Pixel-Perfect UI:** Accurately implemented based on the provided Figma constraints, including custom typography (Google Fonts - Inter), exact color grading for both Light and Dark themes, and precise layouts.
