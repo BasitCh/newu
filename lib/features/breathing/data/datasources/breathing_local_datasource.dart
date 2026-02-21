@@ -11,13 +11,10 @@ class BreathingLocalDataSourceImpl implements IBreathingLocalDataSource {
   BreathingSession _cachedSession = const BreathingSession();
 
   @override
-  Future<BreathingSession> getSettings() async {
-    return Future.value(_cachedSession);
-  }
+  Future<BreathingSession> getSettings() async => _cachedSession;
 
   @override
   Future<void> saveSettings(BreathingSession session) async {
     _cachedSession = session;
-    return Future.value();
   }
 }
