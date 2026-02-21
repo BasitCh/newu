@@ -16,7 +16,7 @@ class SetupView extends StatefulWidget {
 
 class _SetupViewState extends State<SetupView> {
   bool _isAdvancedExpanded = false;
-  int _simpleDuration = 4; // Default as per requirements
+  int _simpleDuration = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,10 @@ class _SetupViewState extends State<SetupView> {
     final darkPurple = const Color(0xFF630068);
     final headerPurple = isDark ? Colors.white : const Color(0xFF630068);
     final cardColor = isDark
-        ? const Color(0xFF2C1E4A).withOpacity(0.95)
+        ? const Color(0xFF2C1E4A).withValues(alpha: 0.95)
         : Colors.white;
     final pillColor = isDark
-        ? const Color(
-            0xFF1A1321,
-          ) // Matches dark theme chip & button row backgrounds
+        ? const Color(0xFF1A1321)
         : const Color(0xFFF2F2F7);
 
     final session = state.session;
@@ -101,7 +99,7 @@ class _SetupViewState extends State<SetupView> {
                       ? []
                       : [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.04),
+                            color: Colors.black.withValues(alpha: 0.04),
                             blurRadius: 16,
                             offset: const Offset(0, 8),
                           ),
@@ -114,11 +112,11 @@ class _SetupViewState extends State<SetupView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSectionHeader(
-                      'Breath duration',
-                      'Seconds per phase',
-                      textColor,
-                      secondaryTextColor,
+                    SectionHeader(
+                      title: 'Breath duration',
+                      subtitle: 'Seconds per phase',
+                      textColor: textColor,
+                      secondaryColor: secondaryTextColor,
                     ),
                     const SizedBox(height: 16),
                     SingleChildScrollView(
@@ -128,7 +126,7 @@ class _SetupViewState extends State<SetupView> {
                           final isSelected = _simpleDuration == dur;
                           return Padding(
                             padding: const EdgeInsets.only(right: 8.0),
-                            child: _buildSelectorPill(
+                            child: SelectorPill(
                               label: '${dur}s',
                               isSelected: isSelected,
                               orangeColor: orangeColor,
@@ -156,13 +154,13 @@ class _SetupViewState extends State<SetupView> {
                     ),
                     const SizedBox(height: 32),
 
-                    _buildSectionHeader(
-                      'Rounds',
-                      isDark
+                    SectionHeader(
+                      title: 'Rounds',
+                      subtitle: isDark
                           ? 'Full box breathing cycles'
                           : 'Full breathing cycles,',
-                      textColor,
-                      secondaryTextColor,
+                      textColor: textColor,
+                      secondaryColor: secondaryTextColor,
                     ),
                     const SizedBox(height: 16),
                     SingleChildScrollView(
@@ -228,17 +226,17 @@ class _SetupViewState extends State<SetupView> {
                         });
                       },
                       child: Container(
-                        color:
-                            Colors.transparent, // Ensure full area is tappable
+                        color: Colors.transparent,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                              child: _buildSectionHeader(
-                                'Advanced timing',
-                                'Set different durations for each phase',
-                                textColor,
-                                secondaryTextColor,
+                              child: SectionHeader(
+                                title: 'Advanced timing',
+                                subtitle:
+                                    'Set different durations for each phase',
+                                textColor: textColor,
+                                secondaryColor: secondaryTextColor,
                               ),
                             ),
                             Padding(
@@ -256,12 +254,12 @@ class _SetupViewState extends State<SetupView> {
                     ),
                     if (_isAdvancedExpanded) ...[
                       const SizedBox(height: 24),
-                      _buildAdjusterRow(
-                        'Breathe in',
-                        session.inhaleDuration,
-                        pillColor,
-                        textColor,
-                        (val) {
+                      AdjusterRow(
+                        title: 'Breathe in',
+                        value: session.inhaleDuration,
+                        pillColor: pillColor,
+                        textColor: textColor,
+                        onChanged: (val) {
                           if (val > 0) {
                             context.read<BreathingBloc>().add(
                               BreathingEvent.settingsChanged(
@@ -272,12 +270,12 @@ class _SetupViewState extends State<SetupView> {
                         },
                       ),
                       const SizedBox(height: 12),
-                      _buildAdjusterRow(
-                        'Hold in',
-                        session.holdInDuration,
-                        pillColor,
-                        textColor,
-                        (val) {
+                      AdjusterRow(
+                        title: 'Hold in',
+                        value: session.holdInDuration,
+                        pillColor: pillColor,
+                        textColor: textColor,
+                        onChanged: (val) {
                           if (val >= 0) {
                             context.read<BreathingBloc>().add(
                               BreathingEvent.settingsChanged(
@@ -288,12 +286,12 @@ class _SetupViewState extends State<SetupView> {
                         },
                       ),
                       const SizedBox(height: 12),
-                      _buildAdjusterRow(
-                        'Breathe out',
-                        session.exhaleDuration,
-                        pillColor,
-                        textColor,
-                        (val) {
+                      AdjusterRow(
+                        title: 'Breathe out',
+                        value: session.exhaleDuration,
+                        pillColor: pillColor,
+                        textColor: textColor,
+                        onChanged: (val) {
                           if (val > 0) {
                             context.read<BreathingBloc>().add(
                               BreathingEvent.settingsChanged(
@@ -304,12 +302,12 @@ class _SetupViewState extends State<SetupView> {
                         },
                       ),
                       const SizedBox(height: 12),
-                      _buildAdjusterRow(
-                        'Hold out',
-                        session.holdOutDuration,
-                        pillColor,
-                        textColor,
-                        (val) {
+                      AdjusterRow(
+                        title: 'Hold out',
+                        value: session.holdOutDuration,
+                        pillColor: pillColor,
+                        textColor: textColor,
+                        onChanged: (val) {
                           if (val >= 0) {
                             context.read<BreathingBloc>().add(
                               BreathingEvent.settingsChanged(
@@ -327,11 +325,11 @@ class _SetupViewState extends State<SetupView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: _buildSectionHeader(
-                            'Sound',
-                            'Gentle chime between phases',
-                            textColor,
-                            secondaryTextColor,
+                          child: SectionHeader(
+                            title: 'Sound',
+                            subtitle: 'Gentle chime between phases',
+                            textColor: textColor,
+                            secondaryColor: secondaryTextColor,
                           ),
                         ),
                         CupertinoSwitch(

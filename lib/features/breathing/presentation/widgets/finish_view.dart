@@ -167,7 +167,7 @@ class FinishView extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               context.read<BreathingBloc>().add(
-                const BreathingEvent.toggleTheme(),
+                const BreathingEvent.themeToggled(),
               );
             },
             child: Container(
