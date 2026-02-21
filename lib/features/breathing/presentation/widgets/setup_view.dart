@@ -34,7 +34,9 @@ class _SetupViewState extends State<SetupView> {
         ? const Color(0xFF2C1E4A).withOpacity(0.95)
         : Colors.white;
     final pillColor = isDark
-        ? const Color(0xFF3D2B59)
+        ? const Color(
+            0xFF1A1321,
+          ) // Matches dark theme chip & button row backgrounds
         : const Color(0xFFF2F2F7);
 
     final session = state.session;
@@ -437,7 +439,7 @@ class _SetupViewState extends State<SetupView> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.transparent : pillColor,
+          color: (isSelected && !isDark) ? Colors.transparent : pillColor,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: isSelected ? orangeColor : Colors.transparent,

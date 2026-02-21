@@ -78,35 +78,35 @@ class _BreathingView extends StatelessWidget {
               // 4. Background Clouds
               if (isDark) ...[
                 Positioned(
-                  top: 200,
-                  right: -40,
-                  child: SvgPicture.asset(
-                    'assets/dark_small_cloud_1.svg',
-                    width: 110,
-                  ),
-                ),
-                Positioned(
-                  top: 300,
+                  top: -10,
                   left: -20,
                   child: SvgPicture.asset(
-                    'assets/dark_small_cloud_2.svg',
-                    width: 91,
+                    'assets/dark_small_cloud_1.svg',
+                    width: 160,
                   ),
                 ),
                 Positioned(
-                  bottom: 120,
+                  top: 150,
+                  right: -10,
+                  child: SvgPicture.asset(
+                    'assets/dark_small_cloud_2.svg',
+                    width: 100,
+                  ),
+                ),
+                Positioned(
+                  top: 450,
                   left: -30,
                   child: SvgPicture.asset(
                     'assets/dark_ cloud_1.svg',
-                    width: 106,
+                    width: 140,
                   ),
                 ),
                 Positioned(
-                  bottom: 180,
-                  right: 20,
+                  bottom: 200,
+                  right: -20,
                   child: SvgPicture.asset(
                     'assets/dark_ cloud_2.svg',
-                    width: 106,
+                    width: 120,
                   ),
                 ),
                 Positioned(
@@ -121,9 +121,8 @@ class _BreathingView extends StatelessWidget {
               ] else ...[
                 // Top main cloud
                 Positioned(
-                  top: -60,
-                  left: -50,
-                  right: -50,
+                  top: 30,
+                  right: -70,
                   child: SvgPicture.asset(
                     'assets/big_cloud.svg',
                     fit: BoxFit.fitWidth,
@@ -137,9 +136,9 @@ class _BreathingView extends StatelessWidget {
                 ),
                 // Left middle cloud
                 Positioned(
-                  top: 220,
-                  left: -50,
-                  child: SvgPicture.asset('assets/cloud _3.svg', width: 130),
+                  top: 170,
+                  left: -20,
+                  child: SvgPicture.asset('assets/cloud _2.svg', width: 130),
                 ),
                 // Left lower cloud
                 Positioned(
@@ -149,9 +148,9 @@ class _BreathingView extends StatelessWidget {
                 ),
                 // Right lower cloud
                 Positioned(
-                  bottom: 250,
+                  top: 250,
                   right: -20,
-                  child: SvgPicture.asset('assets/cloud _2.svg', width: 120),
+                  child: SvgPicture.asset('assets/cloud _3.svg', width: 120),
                 ),
                 // Bottom clouds
                 Positioned(
