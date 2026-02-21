@@ -25,12 +25,12 @@ $BreathingStateCopyWith<BreathingState> get copyWith => _$BreathingStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BreathingState&&(identical(other.phase, phase) || other.phase == phase)&&const DeepCollectionEquality().equals(other.session, session)&&(identical(other.currentRound, currentRound) || other.currentRound == currentRound)&&(identical(other.secondsRemaining, secondsRemaining) || other.secondsRemaining == secondsRemaining)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BreathingState&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.session, session) || other.session == session)&&(identical(other.currentRound, currentRound) || other.currentRound == currentRound)&&(identical(other.secondsRemaining, secondsRemaining) || other.secondsRemaining == secondsRemaining)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phase,const DeepCollectionEquality().hash(session),currentRound,secondsRemaining,isDarkMode);
+int get hashCode => Object.hash(runtimeType,phase,session,currentRound,secondsRemaining,isDarkMode);
 
 @override
 String toString() {
@@ -49,7 +49,7 @@ $Res call({
 });
 
 
-
+$BreathingSessionCopyWith<$Res> get session;
 
 }
 /// @nodoc
@@ -62,17 +62,26 @@ class _$BreathingStateCopyWithImpl<$Res>
 
 /// Create a copy of BreathingState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phase = null,Object? session = freezed,Object? currentRound = null,Object? secondsRemaining = null,Object? isDarkMode = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? phase = null,Object? session = null,Object? currentRound = null,Object? secondsRemaining = null,Object? isDarkMode = null,}) {
   return _then(_self.copyWith(
 phase: null == phase ? _self.phase : phase // ignore: cast_nullable_to_non_nullable
-as BreathingPhase,session: freezed == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
+as BreathingPhase,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as BreathingSession,currentRound: null == currentRound ? _self.currentRound : currentRound // ignore: cast_nullable_to_non_nullable
 as int,secondsRemaining: null == secondsRemaining ? _self.secondsRemaining : secondsRemaining // ignore: cast_nullable_to_non_nullable
 as int,isDarkMode: null == isDarkMode ? _self.isDarkMode : isDarkMode // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
-
+/// Create a copy of BreathingState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BreathingSessionCopyWith<$Res> get session {
+  
+  return $BreathingSessionCopyWith<$Res>(_self.session, (value) {
+    return _then(_self.copyWith(session: value));
+  });
+}
 }
 
 
@@ -229,12 +238,12 @@ _$BreathingStateCopyWith<_BreathingState> get copyWith => __$BreathingStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BreathingState&&(identical(other.phase, phase) || other.phase == phase)&&const DeepCollectionEquality().equals(other.session, session)&&(identical(other.currentRound, currentRound) || other.currentRound == currentRound)&&(identical(other.secondsRemaining, secondsRemaining) || other.secondsRemaining == secondsRemaining)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BreathingState&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.session, session) || other.session == session)&&(identical(other.currentRound, currentRound) || other.currentRound == currentRound)&&(identical(other.secondsRemaining, secondsRemaining) || other.secondsRemaining == secondsRemaining)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phase,const DeepCollectionEquality().hash(session),currentRound,secondsRemaining,isDarkMode);
+int get hashCode => Object.hash(runtimeType,phase,session,currentRound,secondsRemaining,isDarkMode);
 
 @override
 String toString() {
@@ -253,7 +262,7 @@ $Res call({
 });
 
 
-
+@override $BreathingSessionCopyWith<$Res> get session;
 
 }
 /// @nodoc
@@ -266,10 +275,10 @@ class __$BreathingStateCopyWithImpl<$Res>
 
 /// Create a copy of BreathingState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? phase = null,Object? session = freezed,Object? currentRound = null,Object? secondsRemaining = null,Object? isDarkMode = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? phase = null,Object? session = null,Object? currentRound = null,Object? secondsRemaining = null,Object? isDarkMode = null,}) {
   return _then(_BreathingState(
 phase: null == phase ? _self.phase : phase // ignore: cast_nullable_to_non_nullable
-as BreathingPhase,session: freezed == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
+as BreathingPhase,session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as BreathingSession,currentRound: null == currentRound ? _self.currentRound : currentRound // ignore: cast_nullable_to_non_nullable
 as int,secondsRemaining: null == secondsRemaining ? _self.secondsRemaining : secondsRemaining // ignore: cast_nullable_to_non_nullable
 as int,isDarkMode: null == isDarkMode ? _self.isDarkMode : isDarkMode // ignore: cast_nullable_to_non_nullable
@@ -277,7 +286,16 @@ as bool,
   ));
 }
 
-
+/// Create a copy of BreathingState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BreathingSessionCopyWith<$Res> get session {
+  
+  return $BreathingSessionCopyWith<$Res>(_self.session, (value) {
+    return _then(_self.copyWith(session: value));
+  });
+}
 }
 
 // dart format on

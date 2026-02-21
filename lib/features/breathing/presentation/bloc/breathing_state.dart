@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../domain/entities/breathing_session.dart';
+import '../../domain/entities/breathing_session.dart';
 
 part 'breathing_state.freezed.dart';
 

@@ -31,9 +31,6 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i638.BreathingBloc>(
-      () => _i638.BreathingBloc(gh<InvalidType>(), gh<InvalidType>()),
-    );
     gh.lazySingleton<_i508.IBreathingLocalDataSource>(
       () => _i508.BreathingLocalDataSourceImpl(),
     );
@@ -47,6 +44,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i264.SaveBreathingSettings>(
       () => _i264.SaveBreathingSettings(gh<_i430.IBreathingRepository>()),
+    );
+    gh.factory<_i638.BreathingBloc>(
+      () => _i638.BreathingBloc(
+        gh<_i263.GetBreathingSettings>(),
+        gh<_i264.SaveBreathingSettings>(),
+      ),
     );
     return this;
   }

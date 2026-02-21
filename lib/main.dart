@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'injection.dart';
+import 'features/breathing/presentation/pages/breathing_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,9 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF630068)),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(child: Text('NewU Breathing App setup complete!')),
-      ),
+      home: const BreathingPage(),
     );
   }
 }

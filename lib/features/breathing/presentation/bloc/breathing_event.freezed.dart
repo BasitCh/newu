@@ -55,15 +55,15 @@ extension BreathingEventPatterns on BreathingEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( _SettingsChanged value)?  settingsChanged,TResult Function( _ThemeToggled value)?  themeToggled,TResult Function( _StartExercise value)?  startExercise,TResult Function( _Tick value)?  tick,TResult Function( _Reset value)?  reset,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Started value)?  started,TResult Function( SettingsChanged value)?  settingsChanged,TResult Function( ThemeToggled value)?  themeToggled,TResult Function( StartExercise value)?  startExercise,TResult Function( Tick value)?  tick,TResult Function( Reset value)?  reset,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started(_that);case _SettingsChanged() when settingsChanged != null:
-return settingsChanged(_that);case _ThemeToggled() when themeToggled != null:
-return themeToggled(_that);case _StartExercise() when startExercise != null:
-return startExercise(_that);case _Tick() when tick != null:
-return tick(_that);case _Reset() when reset != null:
+case Started() when started != null:
+return started(_that);case SettingsChanged() when settingsChanged != null:
+return settingsChanged(_that);case ThemeToggled() when themeToggled != null:
+return themeToggled(_that);case StartExercise() when startExercise != null:
+return startExercise(_that);case Tick() when tick != null:
+return tick(_that);case Reset() when reset != null:
 return reset(_that);case _:
   return orElse();
 
@@ -82,15 +82,15 @@ return reset(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( _SettingsChanged value)  settingsChanged,required TResult Function( _ThemeToggled value)  themeToggled,required TResult Function( _StartExercise value)  startExercise,required TResult Function( _Tick value)  tick,required TResult Function( _Reset value)  reset,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Started value)  started,required TResult Function( SettingsChanged value)  settingsChanged,required TResult Function( ThemeToggled value)  themeToggled,required TResult Function( StartExercise value)  startExercise,required TResult Function( Tick value)  tick,required TResult Function( Reset value)  reset,}){
 final _that = this;
 switch (_that) {
-case _Started():
-return started(_that);case _SettingsChanged():
-return settingsChanged(_that);case _ThemeToggled():
-return themeToggled(_that);case _StartExercise():
-return startExercise(_that);case _Tick():
-return tick(_that);case _Reset():
+case Started():
+return started(_that);case SettingsChanged():
+return settingsChanged(_that);case ThemeToggled():
+return themeToggled(_that);case StartExercise():
+return startExercise(_that);case Tick():
+return tick(_that);case Reset():
 return reset(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -108,15 +108,15 @@ return reset(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( _SettingsChanged value)?  settingsChanged,TResult? Function( _ThemeToggled value)?  themeToggled,TResult? Function( _StartExercise value)?  startExercise,TResult? Function( _Tick value)?  tick,TResult? Function( _Reset value)?  reset,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Started value)?  started,TResult? Function( SettingsChanged value)?  settingsChanged,TResult? Function( ThemeToggled value)?  themeToggled,TResult? Function( StartExercise value)?  startExercise,TResult? Function( Tick value)?  tick,TResult? Function( Reset value)?  reset,}){
 final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started(_that);case _SettingsChanged() when settingsChanged != null:
-return settingsChanged(_that);case _ThemeToggled() when themeToggled != null:
-return themeToggled(_that);case _StartExercise() when startExercise != null:
-return startExercise(_that);case _Tick() when tick != null:
-return tick(_that);case _Reset() when reset != null:
+case Started() when started != null:
+return started(_that);case SettingsChanged() when settingsChanged != null:
+return settingsChanged(_that);case ThemeToggled() when themeToggled != null:
+return themeToggled(_that);case StartExercise() when startExercise != null:
+return startExercise(_that);case Tick() when tick != null:
+return tick(_that);case Reset() when reset != null:
 return reset(_that);case _:
   return null;
 
@@ -136,12 +136,12 @@ return reset(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( BreathingSession session)?  settingsChanged,TResult Function()?  themeToggled,TResult Function()?  startExercise,TResult Function()?  tick,TResult Function()?  reset,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started();case _SettingsChanged() when settingsChanged != null:
-return settingsChanged(_that.session);case _ThemeToggled() when themeToggled != null:
-return themeToggled();case _StartExercise() when startExercise != null:
-return startExercise();case _Tick() when tick != null:
-return tick();case _Reset() when reset != null:
+case Started() when started != null:
+return started();case SettingsChanged() when settingsChanged != null:
+return settingsChanged(_that.session);case ThemeToggled() when themeToggled != null:
+return themeToggled();case StartExercise() when startExercise != null:
+return startExercise();case Tick() when tick != null:
+return tick();case Reset() when reset != null:
 return reset();case _:
   return orElse();
 
@@ -162,12 +162,12 @@ return reset();case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( BreathingSession session)  settingsChanged,required TResult Function()  themeToggled,required TResult Function()  startExercise,required TResult Function()  tick,required TResult Function()  reset,}) {final _that = this;
 switch (_that) {
-case _Started():
-return started();case _SettingsChanged():
-return settingsChanged(_that.session);case _ThemeToggled():
-return themeToggled();case _StartExercise():
-return startExercise();case _Tick():
-return tick();case _Reset():
+case Started():
+return started();case SettingsChanged():
+return settingsChanged(_that.session);case ThemeToggled():
+return themeToggled();case StartExercise():
+return startExercise();case Tick():
+return tick();case Reset():
 return reset();case _:
   throw StateError('Unexpected subclass');
 
@@ -187,12 +187,12 @@ return reset();case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( BreathingSession session)?  settingsChanged,TResult? Function()?  themeToggled,TResult? Function()?  startExercise,TResult? Function()?  tick,TResult? Function()?  reset,}) {final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started();case _SettingsChanged() when settingsChanged != null:
-return settingsChanged(_that.session);case _ThemeToggled() when themeToggled != null:
-return themeToggled();case _StartExercise() when startExercise != null:
-return startExercise();case _Tick() when tick != null:
-return tick();case _Reset() when reset != null:
+case Started() when started != null:
+return started();case SettingsChanged() when settingsChanged != null:
+return settingsChanged(_that.session);case ThemeToggled() when themeToggled != null:
+return themeToggled();case StartExercise() when startExercise != null:
+return startExercise();case Tick() when tick != null:
+return tick();case Reset() when reset != null:
 return reset();case _:
   return null;
 
@@ -204,8 +204,8 @@ return reset();case _:
 /// @nodoc
 
 
-class _Started implements BreathingEvent {
-  const _Started();
+class Started implements BreathingEvent {
+  const Started();
   
 
 
@@ -215,7 +215,7 @@ class _Started implements BreathingEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Started);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Started);
 }
 
 
@@ -236,8 +236,8 @@ String toString() {
 /// @nodoc
 
 
-class _SettingsChanged implements BreathingEvent {
-  const _SettingsChanged(this.session);
+class SettingsChanged implements BreathingEvent {
+  const SettingsChanged(this.session);
   
 
  final  BreathingSession session;
@@ -246,18 +246,18 @@ class _SettingsChanged implements BreathingEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SettingsChangedCopyWith<_SettingsChanged> get copyWith => __$SettingsChangedCopyWithImpl<_SettingsChanged>(this, _$identity);
+$SettingsChangedCopyWith<SettingsChanged> get copyWith => _$SettingsChangedCopyWithImpl<SettingsChanged>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsChanged&&const DeepCollectionEquality().equals(other.session, session));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsChanged&&(identical(other.session, session) || other.session == session));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(session));
+int get hashCode => Object.hash(runtimeType,session);
 
 @override
 String toString() {
@@ -268,42 +268,51 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$SettingsChangedCopyWith<$Res> implements $BreathingEventCopyWith<$Res> {
-  factory _$SettingsChangedCopyWith(_SettingsChanged value, $Res Function(_SettingsChanged) _then) = __$SettingsChangedCopyWithImpl;
+abstract mixin class $SettingsChangedCopyWith<$Res> implements $BreathingEventCopyWith<$Res> {
+  factory $SettingsChangedCopyWith(SettingsChanged value, $Res Function(SettingsChanged) _then) = _$SettingsChangedCopyWithImpl;
 @useResult
 $Res call({
  BreathingSession session
 });
 
 
-
+$BreathingSessionCopyWith<$Res> get session;
 
 }
 /// @nodoc
-class __$SettingsChangedCopyWithImpl<$Res>
-    implements _$SettingsChangedCopyWith<$Res> {
-  __$SettingsChangedCopyWithImpl(this._self, this._then);
+class _$SettingsChangedCopyWithImpl<$Res>
+    implements $SettingsChangedCopyWith<$Res> {
+  _$SettingsChangedCopyWithImpl(this._self, this._then);
 
-  final _SettingsChanged _self;
-  final $Res Function(_SettingsChanged) _then;
+  final SettingsChanged _self;
+  final $Res Function(SettingsChanged) _then;
 
 /// Create a copy of BreathingEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? session = freezed,}) {
-  return _then(_SettingsChanged(
-freezed == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
+@pragma('vm:prefer-inline') $Res call({Object? session = null,}) {
+  return _then(SettingsChanged(
+null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as BreathingSession,
   ));
 }
 
-
+/// Create a copy of BreathingEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BreathingSessionCopyWith<$Res> get session {
+  
+  return $BreathingSessionCopyWith<$Res>(_self.session, (value) {
+    return _then(_self.copyWith(session: value));
+  });
+}
 }
 
 /// @nodoc
 
 
-class _ThemeToggled implements BreathingEvent {
-  const _ThemeToggled();
+class ThemeToggled implements BreathingEvent {
+  const ThemeToggled();
   
 
 
@@ -313,7 +322,7 @@ class _ThemeToggled implements BreathingEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ThemeToggled);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ThemeToggled);
 }
 
 
@@ -334,8 +343,8 @@ String toString() {
 /// @nodoc
 
 
-class _StartExercise implements BreathingEvent {
-  const _StartExercise();
+class StartExercise implements BreathingEvent {
+  const StartExercise();
   
 
 
@@ -345,7 +354,7 @@ class _StartExercise implements BreathingEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartExercise);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StartExercise);
 }
 
 
@@ -366,8 +375,8 @@ String toString() {
 /// @nodoc
 
 
-class _Tick implements BreathingEvent {
-  const _Tick();
+class Tick implements BreathingEvent {
+  const Tick();
   
 
 
@@ -377,7 +386,7 @@ class _Tick implements BreathingEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Tick);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Tick);
 }
 
 
@@ -398,8 +407,8 @@ String toString() {
 /// @nodoc
 
 
-class _Reset implements BreathingEvent {
-  const _Reset();
+class Reset implements BreathingEvent {
+  const Reset();
   
 
 
@@ -409,7 +418,7 @@ class _Reset implements BreathingEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Reset);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Reset);
 }
 
 

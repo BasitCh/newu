@@ -4,10 +4,10 @@ import 'package:injectable/injectable.dart';
 
 import 'breathing_event.dart';
 import 'breathing_state.dart';
-import '../../../domain/usecases/get_breathing_settings.dart';
-import '../../../domain/usecases/save_breathing_settings.dart';
+import '../../domain/usecases/get_breathing_settings.dart';
+import '../../domain/usecases/save_breathing_settings.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../../../domain/entities/breathing_session.dart';
+import '../../domain/entities/breathing_session.dart';
 
 @injectable
 class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
@@ -17,15 +17,15 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
 
   BreathingBloc(this.getBreathingSettings, this.saveBreathingSettings)
     : super(const BreathingState()) {
-    on<_Started>(_onStarted);
-    on<_SettingsChanged>(_onSettingsChanged);
-    on<_ThemeToggled>(_onThemeToggled);
-    on<_StartExercise>(_onStartExercise);
-    on<_Tick>(_onTick);
-    on<_Reset>(_onReset);
+    on<Started>(_onStarted);
+    on<SettingsChanged>(_onSettingsChanged);
+    on<ThemeToggled>(_onThemeToggled);
+    on<StartExercise>(_onStartExercise);
+    on<Tick>(_onTick);
+    on<Reset>(_onReset);
   }
 
-  Future<void> _onStarted(_Started event, Emitter<BreathingState> emit) async {
+  Future<void> _onStarted(Started event, Emitter<BreathingState> emit) async {
     final result = await getBreathingSettings(NoParams());
     result.fold(
       (failure) => emit(state),
@@ -34,19 +34,16 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
     );
   }
 
-  void _onSettingsChanged(
-    _SettingsChanged event,
-    Emitter<BreathingState> emit,
-  ) {
+  void _onSettingsChanged(SettingsChanged event, Emitter<BreathingState> emit) {
     emit(state.copyWith(session: event.session));
     saveBreathingSettings(SaveBreathingSettingsParams(session: event.session));
   }
 
-  void _onThemeToggled(_ThemeToggled event, Emitter<BreathingState> emit) {
+  void _onThemeToggled(ThemeToggled event, Emitter<BreathingState> emit) {
     emit(state.copyWith(isDarkMode: !state.isDarkMode));
   }
 
-  void _onStartExercise(_StartExercise event, Emitter<BreathingState> emit) {
+  void _onStartExercise(StartExercise event, Emitter<BreathingState> emit) {
     emit(
       state.copyWith(
         phase: BreathingPhase.ready,
@@ -64,7 +61,7 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
     });
   }
 
-  void _onTick(_Tick event, Emitter<BreathingState> emit) {
+  void _onTick(Tick event, Emitter<BreathingState> emit) {
     if (state.phase == BreathingPhase.setup ||
         state.phase == BreathingPhase.finished)
       return;
@@ -135,7 +132,7 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
     }
   }
 
-  void _onReset(_Reset event, Emitter<BreathingState> emit) {
+  void _onReset(Reset event, Emitter<BreathingState> emit) {
     _timer?.cancel();
     emit(
       state.copyWith(
