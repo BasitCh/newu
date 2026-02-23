@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../bloc/breathing_bloc.dart';
 import '../bloc/breathing_event.dart';
 import 'components/setup_view_components.dart';
@@ -21,9 +19,12 @@ class _SetupViewState extends State<SetupView> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<BreathingBloc>().state;
-    final isDark = state.isDarkMode;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
-    final textColor = isDark ? Colors.white : const Color(0xFF1A1A1A);
+    final textColor =
+        theme.textTheme.bodyLarge?.color ??
+        (isDark ? Colors.white : const Color(0xFF1A1A1A));
     final secondaryTextColor = isDark
         ? Colors.white70
         : const Color(0xFF8A8A8E);
@@ -39,35 +40,36 @@ class _SetupViewState extends State<SetupView> {
 
     final session = state.session;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            isDark ? 'Set your pace' : 'Set your breathing pace',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.inter(
-              fontSize: 28,
-              fontWeight: FontWeight.w700,
-              color: headerPurple,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Customise your breathing session. You\ncan always change this later.',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.inter(
-              fontSize: 14,
-              color: secondaryTextColor,
-              height: 1.4,
-            ),
-          ),
-          const SizedBox(height: 32),
+    return Center(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Set your breathing pace',
+                textAlign: TextAlign.center,
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                  color: headerPurple,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Customise your breathing session. You\ncan always change this later.',
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontSize: 14,
+                  color: secondaryTextColor,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 32),
 
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
+              Container(
                 decoration: BoxDecoration(
                   color: cardColor,
                   borderRadius: BorderRadius.circular(24),
@@ -143,42 +145,33 @@ class _SetupViewState extends State<SetupView> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children:
-                            (isDark
-                                    ? [
-                                        {'val': 2, 'label': '2 quick'},
-                                        {'val': 4, 'label': '4 calm'},
-                                        {'val': 6, 'label': '6 deep'},
-                                        {'val': 8, 'label': '8 zen'},
-                                      ]
-                                    : [
-                                        {'val': 2, 'label': '2 min'},
-                                        {'val': 4, 'label': '4 min'},
-                                        {'val': 6, 'label': '6 min'},
-                                        {'val': 8, 'label': '8 min'},
-                                      ])
-                                .map((item) {
-                                  final val = item['val'] as int;
-                                  final label = item['label'] as String;
-                                  final isSelected = session.rounds == val;
-                                  return Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: SelectorPill(
-                                      label: label,
-                                      isSelected: isSelected,
-                                      orangeColor: orangeColor,
-                                      pillColor: pillColor,
-                                      isDark: isDark,
-                                      onTap: () {
-                                        context.read<BreathingBloc>().add(
-                                          BreathingEvent.settingsChanged(
-                                            session.copyWith(rounds: val),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                })
-                                .toList(),
+                            [
+                              {'val': 2, 'label': '2 quick'},
+                              {'val': 4, 'label': '4 calm'},
+                              {'val': 6, 'label': '6 deep'},
+                              {'val': 8, 'label': '8 zen'},
+                            ].map((item) {
+                              final val = item['val'] as int;
+                              final label = item['label'] as String;
+                              final isSelected = session.rounds == val;
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: SelectorPill(
+                                  label: label,
+                                  isSelected: isSelected,
+                                  orangeColor: orangeColor,
+                                  pillColor: pillColor,
+                                  isDark: isDark,
+                                  onTap: () {
+                                    context.read<BreathingBloc>().add(
+                                      BreathingEvent.settingsChanged(
+                                        session.copyWith(rounds: val),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            }).toList(),
                       ),
                     ),
                     const SizedBox(height: 32),
@@ -324,42 +317,41 @@ class _SetupViewState extends State<SetupView> {
                   ],
                 ),
               ),
-            ),
-          ),
 
-          const SizedBox(height: 24),
-
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: darkPurple,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40),
-              ),
-              elevation: 0,
-            ),
-            onPressed: () {
-              context.read<BreathingBloc>().add(
-                const BreathingEvent.startExercise(),
-              );
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Start breathing',
-                  style: GoogleFonts.inter(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+              const SizedBox(height: 24),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: darkPurple,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
                   ),
+                  elevation: 0,
                 ),
-                const SizedBox(width: 8),
-                const Icon(Icons.air, size: 24),
-              ],
-            ),
+                onPressed: () {
+                  context.read<BreathingBloc>().add(
+                    const BreathingEvent.startExercise(),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Start breathing',
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(Icons.air, size: 24),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

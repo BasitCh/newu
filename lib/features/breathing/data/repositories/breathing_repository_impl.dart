@@ -5,8 +5,8 @@ import '../../domain/entities/breathing_session.dart';
 import '../../domain/repositories/breathing_repository.dart';
 import '../datasources/breathing_local_datasource.dart';
 
-@LazySingleton(as: IBreathingRepository)
-class BreathingRepositoryImpl implements IBreathingRepository {
+@LazySingleton(as: BreathingRepository)
+class BreathingRepositoryImpl implements BreathingRepository {
   final IBreathingLocalDataSource localDataSource;
 
   BreathingRepositoryImpl({required this.localDataSource});

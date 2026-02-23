@@ -118,18 +118,12 @@ class BreathingBloc extends Bloc<BreathingEvent, BreathingState> {
         break;
     }
 
-    if (nextPhase != state.phase &&
-        nextPhase != BreathingPhase.setup &&
-        nextPhase != BreathingPhase.ready &&
-        nextPhase != BreathingPhase.finished) {
-      _audioPlayer.play(AssetSource('chime.wav'));
-    }
-
     emit(state.copyWith(phase: nextPhase, secondsRemaining: nextSeconds));
   }
 
   void _checkRoundEnd(Emitter<BreathingState> emit, int currentRound) {
     if (currentRound >= state.session.rounds) {
+      _audioPlayer.play(AssetSource('chime.wav'));
       _timer?.cancel();
       emit(state.copyWith(phase: BreathingPhase.finished));
     } else {

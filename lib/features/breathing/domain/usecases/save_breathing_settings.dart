@@ -9,7 +9,7 @@ import '../repositories/breathing_repository.dart';
 @lazySingleton
 class SaveBreathingSettings
     implements UseCase<void, SaveBreathingSettingsParams> {
-  final IBreathingRepository repository;
+  final BreathingRepository repository;
 
   SaveBreathingSettings(this.repository);
 

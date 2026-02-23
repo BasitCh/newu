@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'injection.dart';
-import 'features/breathing/presentation/pages/breathing_page.dart';
+import 'core/presentation/theme/app_theme.dart';
+import 'core/presentation/router/app_router.dart';
+import 'features/breathing/presentation/bloc/breathing_bloc.dart';
+import 'features/breathing/presentation/bloc/breathing_event.dart';
+import 'features/breathing/presentation/bloc/breathing_state.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,13 +18,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'NewU Breathing',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF630068)),
-        useMaterial3: true,
+    return BlocProvider(
+      create: (context) =>
+          getIt<BreathingBloc>()..add(const BreathingEvent.started()),
+      child: BlocBuilder<BreathingBloc, BreathingState>(
+        buildWhen: (previous, current) =>
+            previous.isDarkMode != current.isDarkMode,
+        builder: (context, state) {
+          return MaterialApp.router(
+            title: 'NewU Breathing',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            routerConfig: AppRouter.router,
+          );
+        },
       ),
-      home: const BreathingPage(),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../bloc/breathing_bloc.dart';
@@ -11,8 +10,11 @@ class FinishView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.watch<BreathingBloc>().state.isDarkMode;
-    final textColor = isDark ? Colors.white : const Color(0xFF1A1A1A);
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final textColor =
+        theme.textTheme.bodyLarge?.color ??
+        (isDark ? Colors.white : const Color(0xFF1A1A1A));
     final secondaryTextColor = isDark
         ? Colors.white70
         : const Color(0xFF8A8A8E);
@@ -30,24 +32,12 @@ class FinishView extends StatelessWidget {
                   SizedBox(
                     height: 200,
                     width: 200,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF34C759),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.check,
-                            color: Colors.white,
-                            size: 60,
-                          ),
-                        ),
-                      ],
+                    child: Center(
+                      child: Lottie.asset(
+                        'assets/animation.lottie',
+                        width: 200,
+                        height: 200,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -57,7 +47,7 @@ class FinishView extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: 'You did it! ',
-                          style: GoogleFonts.inter(
+                          style: theme.textTheme.headlineMedium?.copyWith(
                             fontSize: 28,
                             fontWeight: FontWeight.w700,
                             color: textColor,
@@ -76,7 +66,7 @@ class FinishView extends StatelessWidget {
                     child: Text(
                       'Great rounds of calm, just like that. Your mind thanks you.',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
+                      style: theme.textTheme.bodyMedium?.copyWith(
                         fontSize: 14,
                         height: 1.5,
                         color: secondaryTextColor,
@@ -108,7 +98,7 @@ class FinishView extends StatelessWidget {
                   children: [
                     Text(
                       'Start again',
-                      style: GoogleFonts.inter(
+                      style: theme.textTheme.labelLarge?.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -145,7 +135,7 @@ class FinishView extends StatelessWidget {
                 },
                 child: Text(
                   'Back to set up',
-                  style: GoogleFonts.inter(
+                  style: theme.textTheme.labelLarge?.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),

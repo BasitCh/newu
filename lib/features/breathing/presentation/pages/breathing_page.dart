@@ -37,7 +37,7 @@ class _BreathingView extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: isDark ? null : Colors.white,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   gradient: isDark
                       ? const LinearGradient(
                           begin: Alignment.topCenter,
@@ -49,137 +49,156 @@ class _BreathingView extends StatelessWidget {
                             Color(0xFF3A2260),
                           ],
                         )
-                      : LinearGradient(
-                          transform: const GradientRotation(
-                            74.192 * 3.1415926535 / 180,
-                          ),
-                          colors: [
-                            const Color(0xFF630068).withValues(alpha: 0.08),
-                            const Color(0xFFFF8A00).withValues(alpha: 0.08),
-                          ],
-                        ),
+                      : null,
                 ),
               ),
 
-              if (isDark)
-                Positioned.fill(
-                  child: SvgPicture.asset(
-                    'assets/stars.svg',
-                    fit: BoxFit.cover,
+              Positioned.fill(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  child: Stack(
+                    key: ValueKey<bool>(isDark),
+                    fit: StackFit.expand,
+                    children: [
+                      if (isDark)
+                        Positioned.fill(
+                          child: SvgPicture.asset(
+                            'assets/stars.svg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (isDark) ...[
+                        Positioned(
+                          top: -10,
+                          left: -20,
+                          child: Opacity(
+                            opacity: 0.15,
+                            child: SvgPicture.asset(
+                              'assets/dark_small_cloud_1.svg',
+                              width: 160,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 150,
+                          right: -10,
+                          child: Opacity(
+                            opacity: 0.15,
+                            child: SvgPicture.asset(
+                              'assets/dark_small_cloud_2.svg',
+                              width: 100,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 450,
+                          left: -30,
+                          child: Opacity(
+                            opacity: 0.15,
+                            child: SvgPicture.asset(
+                              'assets/dark_cloud_1.svg',
+                              width: 140,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 200,
+                          right: -20,
+                          child: Opacity(
+                            opacity: 0.15,
+                            child: SvgPicture.asset(
+                              'assets/dark_cloud_2.svg',
+                              width: 120,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: -20,
+                          left: -20,
+                          right: -20,
+                          child: Opacity(
+                            opacity: 0.15,
+                            child: SvgPicture.asset(
+                              'assets/dark_mode_cloud.svg',
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
+                        ),
+                      ] else ...[
+                        Positioned(
+                          top: 30,
+                          right: -70,
+                          child: SvgPicture.asset(
+                            'assets/big_cloud.svg',
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                        Positioned(
+                          top: 150,
+                          right: -40,
+                          child: SvgPicture.asset(
+                            'assets/cloud_1.svg',
+                            width: 140,
+                          ),
+                        ),
+                        Positioned(
+                          top: 170,
+                          left: -20,
+                          child: SvgPicture.asset(
+                            'assets/cloud_2.svg',
+                            width: 130,
+                          ),
+                        ),
+                        Positioned(
+                          top: 550,
+                          left: -20,
+                          child: SvgPicture.asset(
+                            'assets/small_cloud.svg',
+                            width: 90,
+                          ),
+                        ),
+                        Positioned(
+                          top: 250,
+                          right: -20,
+                          child: SvgPicture.asset(
+                            'assets/cloud_3.svg',
+                            width: 120,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 60,
+                          right: -20,
+                          left: 60,
+                          child: SvgPicture.asset(
+                            'assets/medium_bottom_cloud.svg',
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: -20,
+                          left: -20,
+                          right: -20,
+                          child: SvgPicture.asset(
+                            'assets/bottom_cloud.svg',
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
-
-              if (isDark) ...[
-                Positioned(
-                  top: -10,
-                  left: -20,
-                  child: Opacity(
-                    opacity: 0.15,
-                    child: SvgPicture.asset(
-                      'assets/dark_small_cloud_1.svg',
-                      width: 160,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 150,
-                  right: -10,
-                  child: Opacity(
-                    opacity: 0.15,
-                    child: SvgPicture.asset(
-                      'assets/dark_small_cloud_2.svg',
-                      width: 100,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 450,
-                  left: -30,
-                  child: Opacity(
-                    opacity: 0.15,
-                    child: SvgPicture.asset(
-                      'assets/dark_ cloud_1.svg',
-                      width: 140,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 200,
-                  right: -20,
-                  child: Opacity(
-                    opacity: 0.15,
-                    child: SvgPicture.asset(
-                      'assets/dark_ cloud_2.svg',
-                      width: 120,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: -20,
-                  left: -20,
-                  right: -20,
-                  child: Opacity(
-                    opacity: 0.15,
-                    child: SvgPicture.asset(
-                      'assets/dark_mode_cloud.svg',
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                ),
-              ] else ...[
-                Positioned(
-                  top: 30,
-                  right: -70,
-                  child: SvgPicture.asset(
-                    'assets/big_cloud.svg',
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-                Positioned(
-                  top: 150,
-                  right: -40,
-                  child: SvgPicture.asset('assets/cloud _1.svg', width: 140),
-                ),
-                Positioned(
-                  top: 170,
-                  left: -20,
-                  child: SvgPicture.asset('assets/cloud _2.svg', width: 130),
-                ),
-                Positioned(
-                  top: 550,
-                  left: -20,
-                  child: SvgPicture.asset('assets/small_cloud.svg', width: 90),
-                ),
-                Positioned(
-                  top: 250,
-                  right: -20,
-                  child: SvgPicture.asset('assets/cloud _3.svg', width: 120),
-                ),
-                Positioned(
-                  bottom: 60,
-                  right: -20,
-                  left: 60,
-                  child: SvgPicture.asset(
-                    'assets/medium_bottom_cloud.svg',
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-                Positioned(
-                  bottom: -20,
-                  left: -20,
-                  right: -20,
-                  child: SvgPicture.asset(
-                    'assets/bottom_cloud.svg',
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-              ],
+              ),
 
               Align(
                 alignment: Alignment.topCenter,
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 450),
-                  child: SafeArea(child: _buildContent(state)),
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 72.0),
+                      child: _buildContent(state),
+                    ),
+                  ),
                 ),
               ),
               Positioned(

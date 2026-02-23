@@ -7,7 +7,7 @@ import '../repositories/breathing_repository.dart';
 
 @lazySingleton
 class GetBreathingSettings implements UseCase<BreathingSession, NoParams> {
-  final IBreathingRepository repository;
+  final BreathingRepository repository;
 
   GetBreathingSettings(this.repository);
 

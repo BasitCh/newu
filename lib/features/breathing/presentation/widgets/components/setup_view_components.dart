@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -17,13 +16,14 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           title,
-          style: GoogleFonts.inter(
+          style: theme.textTheme.titleMedium?.copyWith(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: textColor,
@@ -32,7 +32,10 @@ class SectionHeader extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           subtitle,
-          style: GoogleFonts.inter(fontSize: 13, color: secondaryColor),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontSize: 13,
+            color: secondaryColor,
+          ),
         ),
       ],
     );
@@ -75,7 +78,7 @@ class SelectorPill extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: GoogleFonts.inter(
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: isSelected
                 ? orangeColor
                 : (isDark ? Colors.white70 : const Color(0xFF8A8A8E)),
@@ -160,7 +163,7 @@ class AdjusterRow extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.inter(
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 15,
               fontWeight: FontWeight.w500,
               color: textColor,
@@ -183,7 +186,7 @@ class AdjusterRow extends StatelessWidget {
                 child: Text(
                   '${value}s',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: textColor,
